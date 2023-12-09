@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "PureCareHub_HospitalCare/1.0.0": {
+        "runtime": {
+          "PureCareHub_HospitalCare.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PureCareHub_HospitalCare/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

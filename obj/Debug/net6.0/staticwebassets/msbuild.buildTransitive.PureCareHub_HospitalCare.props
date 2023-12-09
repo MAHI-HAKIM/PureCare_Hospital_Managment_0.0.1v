@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\PureCareHub_HospitalCare.props" />
+</Project>
