@@ -1,29 +1,157 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
 
-@* <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
- *@
-
-<div class="container col-lg-12 px-2 py-3">
-    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-        <div class="col-10 col-sm-8 col-lg-6">
-            <img src="@Url.Content("~/Images/undraw_doctors_p6aq.svg")" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
-        </div>
-        <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">Responsive left-aligned hero with image</h1>
-           
-            <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap,
-                the world’s most popular front-end open source toolkit, featuring Sass variables and mixins,
-                responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 mb-3">Primary</button>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4 mb-3">Default</button>
-            </div>
-        </div>
+<section id="hero" class="d-flex align-items-center ">
+    <div class="container-fluid hero-container ml-5">
+        <h1>
+            Welcome to <span style="font-weight:bold;color:deepskyblue;font-style:inherit">Pure</span><span style="font-weight:bolder; color:lawngreen;font-style:italic">Care</span>
+        </h1>
+        <h2><span style="font-weight:bold"> Your Trusted Partner in Healthcare </span></h2>
+        <a class="btn-get-started scrollto ml-5">Get Started</a>
     </div>
-</div>
+</section>
+
+  <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="content">
+                    <h1>Why Choose PureCare?</h1>
+                    <p>
+                        At PureCare, we are dedicated to your well-being. Our commitment to excellence, personalized care,
+                        and cutting-edge technology sets us apart. Choose PureCare for a healthier tomorrow</p>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-check"></i> Comprehensive and Compassionate Care</li>
+                        <li><i class="bi bi-check"></i> Cutting-Edge Medical Technology</li>
+                        <li><i class="bi bi-check"></i> Expert and Caring Healthcare Professionals</li>
+                        <li><i class="bi bi-check"></i> Patient-Centered Approach</li>
+                        <li><i class="bi bi-check"></i> Commitment to Excellence</li>
+                    </ul>
+              <div class="text-center">
+                <a class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch">
+            <div class="icon-boxes d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-receipt"></i>
+                        <h4>Patient-Centric Care</h4>
+                        <p>Our focus is on compassionate and patient-centric care, 
+                            ensuring your well-being is our top priority. 
+                            We tailor our services to meet your unique needs.</p>
+                   </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-cube-alt"></i>
+                       <h4>Quality Assurance</h4>
+                        <p>
+                            We uphold the highest standards of quality in healthcare.
+                            Our commitment to excellence guarantees that you receive the best
+                            possible care and outcomes.
+                        </p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-images"></i>
+                    <h4>Dedicated Support Team</h4>
+                    <p>Experience personalized support from our dedicated team.
+                       We are here to guide you through every step of your healthcare
+                       journey with empathy and care.</p>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End .content-->
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
+            <a class="mb-4"></a>
+          </div>
+
+          <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+                <h3>Providing Exceptional Healthcare Services</h3>
+                <p>At PureCare, we are committed to delivering top-notch healthcare services with a focus
+                    on your well-being. Learn more about what sets us apart:</p>
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-fingerprint"></i></div>
+                    <h4 class="title"><a>Personalized Care</a></h4>
+                 <p class="description">Experience healthcare tailored to your unique needs. Our personalized approach ensures you receive the attention and care you deserve.</p>
+                </div>
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-gift"></i></div>
+                    <h4 class="title"><a>Patient-Centered Focus</a></h4>
+                    <p class="description">We prioritize you. Our patient-centered approach puts your well-being at the forefront, creating a compassionate and supportive healthcare environment.</p>
+                </div>
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-atom"></i></div>
+                    <h4 class="title"><a>Cutting-Edge Technology</a></h4>
+                    <p class="description">Embrace innovation with our use of advanced technology. From diagnostics to treatment, we leverage cutting-edge tools to ensure the best outcomes for you.</p>
+                </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="fas fa-user-md"></i>
+              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Doctors</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+            <div class="count-box">
+              <i class="far fa-hospital"></i>
+              <span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Departments</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+            <div class="count-box">
+              <i class="fas fa-flask"></i>
+              <span data-purecounter-start="0" data-purecounter-end="12" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Research Labs</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+            <div class="count-box">
+              <i class="fas fa-award"></i>
+              <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Awards</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Counts Section -->
+
+

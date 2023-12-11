@@ -70,6 +70,7 @@
   }
 }
 
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -150,6 +151,7 @@ p {
   margin-top: 0;
   margin-bottom: 1rem;
 }
+
 
 abbr[title],
 abbr[data-bs-original-title] {
