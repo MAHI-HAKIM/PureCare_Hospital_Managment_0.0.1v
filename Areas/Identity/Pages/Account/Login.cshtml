@@ -1,0 +1,93 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    // Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";
+}
+
+@* <div class="row justify-content-center">
+    <div class="col-10">
+        <section>
+            <form id="account" method="post">
+                <h2>Welcome back!</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Input.Email" class="form-label">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Input.Password" class="form-label">Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="checkbox mb-3">
+                    <label asp-for="Input.RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div> *@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/Images/departments-3.jpg" alt="Image" class="img-fluid rounded shadow-lg">
+        </div>
+        <div class="col-md-6 contents">
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-8">
+                    <div class="text-center mt-2 mb-4">
+                        <h2 style="font-style:italic; font-weight:bold;">Welcome back</h2>
+                        <p class="text-muted">Login to your account</p>
+                    </div>
+                    <form id="account" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        <div class="form-floating mb-4">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <label asp-for="Input.Email" class="form-label">Email</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.Password" class="form-label">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-check mb-4">
+                            <label asp-for="Input.RememberMe" class="form-label">
+                                <input class="form-check-input" asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                        <div>
+                            <button id="login-submit" type="submit" class="btn btn-block btn-primary">Log in</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-4">
+                        <p class="text-muted mb-4">Don't have an account? <a class="text-primary" style="text-decoration: none;" href="/Identity/Account/Register">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+	.container {
+		margin-top: 120px; /* Adjust the value based on the actual height of your navbar */
+	}
+</style>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

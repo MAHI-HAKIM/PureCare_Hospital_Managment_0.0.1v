@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PureCareHub_HospitalCare.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav mt-2">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+            <a id="manage" class="nav-link custom-welcome-link text-dark mb-3 mr-3" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@UserManager.GetUserName(User)</a>
+    </li>
+    <li class="nav-item">
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="btn btn-outline-danger mr-3">Logout</button>
+
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item mt-2">
+            <a class="btn btn-success mr-3" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>
+
+<style>
+    .custom-welcome-link {
+        background-color: rgba(40, 167, 69, 0.4); /* Green background with 40% opacity */
+        color: rgba(255, 255, 255, 1); /* White text color with 100% opacity */
+        padding: 5px; /* Adjust padding as needed */
+        border-radius: 10px; /* Add some border-radius for a rounded look */
+        text-decoration: none; /* Remove default underline */
+        transition: background-color 0.3s; /* Add transition effect */
+        display: inline-block; /* Make it inline-block to apply padding properly */
+    }
+
+        .custom-welcome-link:hover {
+            background-color: rgba(32, 128, 56, 0.6); /* Darker green color on hover */
+        }
+</style>

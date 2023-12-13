@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="~/PureCareHub_HospitalCare.styles.css" asp-append-version="true" />
-
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -27,10 +26,10 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top">
-            <a class="navbar-brand ml-3" href="#">
-                <img src="../Images/pureCareLogo.png" alt="pureCare Logo" height="40" />
-                <span style="font-size:23px;font-weight:bold;color:deepskyblue;font-style:inherit">Pure</span><span style="font-size:30px;font-weight:bolder; color:greenyellow;font-style:italic">Care</span>
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <a class="navbar-brand ml-3" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/Images/pureCareLogo.png" alt="pureCare Logo" height="40" />
+                <span style="font-size:22px;font-weight:bold;color:deepskyblue;font-style:inherit">Pure</span><span style="font-size:25px;font-weight:bolder; color:greenyellow;font-style:italic">Care</span>
             </a>
             <button class="navbar-toggler collapsed mr-3" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -47,24 +46,41 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" href="#">Disabled</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown04">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
+                   
+                   
                 </ul>
-                <form class="form-inline my-2 my-md-0">
+                @* <form class="form-inline my-2 my-md-0">
                     <input class="form-control me-2"
                            type="search"
                            placeholder="Search for appointment"
                            aria-label="Search" />
-                    <button class="btn btn-outline-success mr-3" type="submit">Check</button>
-                </form>
+                </form> *@
+
+            
+                @if (User.IsInRole("Admin"))
+                {
+                    <ul class="navbar-nav mr-2">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manage
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                                <a class="dropdown-item" href="">Manage Doctor</a>
+                                <a class="dropdown-item" href="">Manage Patients</a>
+                                <a class="dropdown-item" href="">Manage Staff</a>
+
+                            </div>
+                        </li>
+                    </ul>
+                }
+
+                <partial name ="_LoginPartial.cshtml" />
+
+                @* <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-success mr-3">Login</a> *@
+
             </div>
         </nav>
+
     </header>
 
     <div class="">
@@ -79,7 +95,7 @@
         </div>
     </footer> *@
 
-    <div class="container">
+    <div id="footer" class="container mt-5 pt-5">
         <footer class="py-3">
             <div class="row">
                 <div class="col-6">
@@ -117,12 +133,14 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-   
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Your other scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 
 </body>
 </html>

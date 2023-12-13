@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PureCareHub_HospitalCare.Models;
 using System.Diagnostics;
 
@@ -17,7 +18,7 @@ namespace PureCareHub_HospitalCare.Controllers
 		{
 			return View();
 		}
-
+		[Authorize(Roles = "Admin")]
 		public IActionResult Privacy()
 		{
 			return View();
