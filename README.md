@@ -14,4 +14,4 @@ Mevcut doktorları görmekten, rezervasyon almaya ve mevcut doktorlara ve person
 Bunu gerçekleştirmeye çalışırken web programlama dersinde öğrendiğimiz tüm teknolojileri aşağıdaki gibi uygulamaya özen göstereceğiz:
      - ASP.NETCore web programlama
      - MCV mimarisi
-     - SQL ve veritabanı yönetimi vb.
+     - SQL ve veritabanı yönetimi vb..
