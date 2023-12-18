@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1SmbsaxLq7c+m5RvBhgPCDEQvBIjNzsD0Bb5wOfk68Q=",
+  "Hash": "5zpjkODjz47vkw5C6bf8Z3rKXQawIfL1P9WJhuGSfbY=",
   "Source": "PureCareHub_HospitalCare",
   "BasePath": "_content/PureCareHub_HospitalCare",
   "Mode": "Default",
@@ -3891,6 +3891,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\mohammedYusuf.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\myphoto.jpg",
+      "SourceId": "PureCareHub_HospitalCare",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\",
+      "BasePath": "_content/PureCareHub_HospitalCare",
+      "RelativePath": "Images/myphoto.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\myphoto.jpg"
     },
     {
       "Identity": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\pureCareLogo.png",

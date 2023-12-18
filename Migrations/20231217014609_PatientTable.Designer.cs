@@ -12,8 +12,8 @@ using PureCareHub_HospitalCare.Data;
 namespace PureCareHub_HospitalCare.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231212150638_Initial Migration")]
-    partial class InitialMigration
+    [Migration("20231217014609_PatientTable")]
+    partial class PatientTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -234,6 +234,25 @@ namespace PureCareHub_HospitalCare.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("PureCareHub_HospitalCare.Models.Patient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Patients");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -283,6 +302,22 @@ namespace PureCareHub_HospitalCare.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PureCareHub_HospitalCare.Models.Patient", b =>
+                {
+                    b.HasOne("PureCareHub_HospitalCare.Areas.Identity.Data.ApplicationUser", "User")
+                        .WithMany("Patients")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("PureCareHub_HospitalCare.Areas.Identity.Data.ApplicationUser", b =>
+                {
+                    b.Navigation("Patients");
                 });
 #pragma warning restore 612, 618
         }

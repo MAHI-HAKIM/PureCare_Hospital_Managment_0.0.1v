@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using PureCareHub_HospitalCare.Areas.Identity.Data;
+using PureCareHub_HospitalCare.Data;
+using PureCareHub_HospitalCare.Models;
 
 namespace PureCareHub_HospitalCare.Areas.Identity.Pages.Account
 {
@@ -30,14 +32,17 @@ namespace PureCareHub_HospitalCare.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDBContext _context; // Add this line
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDBContext context)
         {
+            _context = context;
             _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
@@ -76,11 +81,11 @@ namespace PureCareHub_HospitalCare.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             /// [DataType(DataType.Text)]
+            [Required(ErrorMessage = "First Name is required")]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
 
-
-            [DataType(DataType.Text)]
+            [Required(ErrorMessage = "Last Name is required")]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
 
@@ -136,8 +141,21 @@ namespace PureCareHub_HospitalCare.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-					// Assign the "Patient" role to the user
-					await _userManager.AddToRoleAsync(user, "Patient");
+                    await _userManager.AddToRoleAsync(user, "Patient");
+
+                    // Create the patient
+                    var patient = new Patient
+                    {
+                        UserId = user.Id,
+                        // Set other properties of the patient...
+                    };
+
+                    _context.Patients.Add(patient);
+                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+
+                    // Assign the "Patient" role to the user
+                    await _userManager.AddToRoleAsync(user, "Patient");
 					var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

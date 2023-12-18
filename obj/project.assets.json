@@ -3909,6 +3909,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "PureCare.Doctors/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/PureCare.Doctors.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/PureCare.Doctors.dll": {}
+        }
       }
     }
   },
@@ -11150,6 +11160,11 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "PureCare.Doctors/1.0.0": {
+      "type": "project",
+      "path": "../PureCare.Doctors/PureCare.Doctors.csproj",
+      "msbuildProject": "../PureCare.Doctors/PureCare.Doctors.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -11159,7 +11174,8 @@
       "Microsoft.AspNetCore.Identity.UI >= 6.0.23",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.23",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.23",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16",
+      "PureCare.Doctors >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -11188,7 +11204,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\mahia\\Desktop\\PureCare.Doctors\\PureCare.Doctors.csproj": {
+              "projectPath": "C:\\Users\\mahia\\Desktop\\PureCare.Doctors\\PureCare.Doctors.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

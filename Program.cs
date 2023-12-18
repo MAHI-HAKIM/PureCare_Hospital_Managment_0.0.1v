@@ -4,14 +4,16 @@ using PureCareHub_HospitalCare.Data;
 using PureCareHub_HospitalCare.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var connectionString = builder.Configuration.GetConnectionString("DBContextConnection") ?? throw new InvalidOperationException("Connection string 'DBContextConnection' not found.");
 
-builder.Services.AddDbContext<DBContext>(options =>
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
-	.AddEntityFrameworkStores<DBContext>();
+	.AddEntityFrameworkStores<ApplicationDBContext>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,7 +21,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    options.Password.RequireUppercase = false;
+	options.Password.RequireUppercase = false;
 });
 
 var app = builder.Build();
@@ -45,14 +47,13 @@ app.MapControllerRoute(
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
-using(var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
-	var roleManager =
-		scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+	var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
 	var roles = new[] { "Admin", "Doctor", "Patient" };
 
-	foreach(var role in roles)
+	foreach (var role in roles)
 	{
 		if (!await roleManager.RoleExistsAsync(role))
 		{
@@ -68,17 +69,17 @@ using (var scope = app.Services.CreateScope())
 	string email = "mahiabdul20@admin.com";
 	string password = "Mahi.2003";
 
-	if(await userManager.FindByEmailAsync(email) == null)
+	if (await userManager.FindByEmailAsync(email) == null)
 	{
 		var user = new ApplicationUser();
 		user.UserName = email;
 		user.Email = email;
-		
+
 
 		await userManager.CreateAsync(user, password);
 
 		await userManager.AddToRoleAsync(user, "Admin");
 	}
-	
+
 }
 app.Run();

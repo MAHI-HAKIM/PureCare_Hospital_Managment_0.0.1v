@@ -49,6 +49,13 @@ body {
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 
+.footer-style {
+    background-color: white;
+    /*opacity: 0.95;*/
+    color: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
 
 .custom-toggler {
     background-color: black; /* Set the background color to black */
@@ -61,6 +68,46 @@ body {
     /*}*/
 /**/
 
+/*--------------------------------------------------------------
+# Background Color
+--------------------------------------------------------------*/
+
+.bg-gradient-light {
+    background-color: steelblue;
+    background-image: linear-gradient(180deg,steelblue 10%,black 100%);
+    background-size: cover;
+}
+
+.nested-bar {
+    position: relative;
+    transition: color 0.3s ease-in-out; /* Smooth transition for text color */
+}
+
+    .nested-bar:hover {
+        color: #70e6e6; /* Change to the desired hover text color */
+    }
+
+    .nested-bar::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #70e6e6; /* Change to the desired underline color */
+        bottom: 0;
+        left: 0;
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s ease-in-out; /* Smooth transition for the underline */
+    }
+
+    .nested-bar:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+/*.nested-bar:hover {
+   font-size:20px;
+    
+}*/
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/

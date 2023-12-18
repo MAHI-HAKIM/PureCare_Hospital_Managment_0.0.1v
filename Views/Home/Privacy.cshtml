@@ -1,46 +1,91 @@
 ﻿
-<div class="contain">
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-6">
-			<img src="~/Images/departments-3.jpg" alt="Image" class="img-fluid rounded shadow-lg">
-		</div>
-		<div class="col-md-6 contents">
-			<div class="row justify-content-center">
-				<div class="col-md-8">
-					<div class="text-center mt-2 mb-4">
-						<h2 style="font-weight:bold">Welcome back</h2>
-						<p class="text-muted">Login to your account</p>
-					</div>
-					<form action="#" method="post">
-						<div class="form-group">
-							<label for="username">Username</label>
-							<input type="text" class="form-control" id="username" placeholder="Enter your username">
-						</div>
-						<div class="form-group">
-							<label for="password">Password</label>
-							<input type="password" class="form-control" id="password" placeholder="Enter your password">
-						</div>
-						<div class="form-check mb-4">
-							<input type="checkbox" class="form-check-input" id="rememberMe" checked>
-							<label class="form-check-label" for="rememberMe">Remember me</label>
-						</div>
-						<button type="submit" class="btn btn-block btn-primary">Log In</button>
-					</form>
-					<div class="text-center mt-4">
-						<p class="text-muted">Don't have an account? <a href="#" class="text-primary">Sign up</a></p>
-						<a href="#" class="text-muted">Forgot Password?</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<div class="container-fluid">
+    <div class="row flex-nowrap ">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark position-fixed" style="height: 100vh">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item mb-3">
+                        <a href="#" class="nav-link align-middle px-0">
+                            <i class="fa fa-home"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fa fa-address-card"></i> <span class="ms-1 d-none d-sm-inline">Patients</span> <i class="fa fa-caret-down ml-2" aria-hidden="true"></i>
+                        </a>
+                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline ">Create patient</span> </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Update patient</span>  </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Delete patient</span>  </a>
+                            </li>
+                        </ul>
+                    </li>
+                  
+                    <li class="nav-item mb-3">
+                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                            <i class=" fa fa-user-md"></i> <span class="ms-1 d-none d-sm-inline">Doctors</span> <i class="fa fa-caret-down ml-2" aria-hidden="true"></i>
+                        </a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Add Doctor</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Update Doctor</span> </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Delete Doctor</span> </a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">List Doctor</span> </a>
+                            </li>
+                        </ul>
+                    </li>
 
+                    <li class="nav-item mb-3">
+                        <a href="#" class="nav-link px-0 align-middle">
+                            <i class="fa fa-tasks"></i> <span class="ms-1 d-none d-sm-inline">Appointment</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="fa fa-hospital"></i> <span class="ms-1 d-none d-sm-inline">Department</span>
+                        </a>
+                        <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+
+                    <li class="mt-5">
+                     
+                    </li>
+                </ul>
+                <hr>
+             
+        </div>
+
+        
+        
+        </div>
+    </div>
 </div>
-<style>
-	.container {
-		margin-top: 110px; /* Adjust the value based on the actual height of your navbar */
-	}
-</style>
