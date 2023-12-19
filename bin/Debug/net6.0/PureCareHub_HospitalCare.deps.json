@@ -13,8 +13,7 @@
           "Microsoft.AspNetCore.Identity.UI": "6.0.23",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.23",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.23",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
-          "PureCare.Doctors": "1.0.0"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16"
         },
         "runtime": {
           "PureCareHub_HospitalCare.dll": {}
@@ -2566,11 +2565,6 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
-      },
-      "PureCare.Doctors/1.0.0": {
-        "runtime": {
-          "PureCare.Doctors.dll": {}
-        }
       }
     }
   },
@@ -4154,11 +4148,6 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
-    },
-    "PureCare.Doctors/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

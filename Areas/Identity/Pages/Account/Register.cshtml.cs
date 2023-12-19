@@ -150,7 +150,7 @@ namespace PureCareHub_HospitalCare.Areas.Identity.Pages.Account
                         // Set other properties of the patient...
                     };
 
-                    _context.Patients.Add(patient);
+                    _context.patients.Add(patient);
                     _context.SaveChanges();
                     await _context.SaveChangesAsync();
 

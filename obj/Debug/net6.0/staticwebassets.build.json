@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5zpjkODjz47vkw5C6bf8Z3rKXQawIfL1P9WJhuGSfbY=",
+  "Hash": "eMhxgvrnAdQos7YNNeKlpGpWrF6F1jsaBN9+J6oeV6k=",
   "Source": "PureCareHub_HospitalCare",
   "BasePath": "_content/PureCareHub_HospitalCare",
   "Mode": "Default",
@@ -3670,6 +3670,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\emanDoc.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\f9ca13ed-cdf3-461e-ab90-94c7fc288314_myphoto.jpg",
+      "SourceId": "PureCareHub_HospitalCare",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\",
+      "BasePath": "_content/PureCareHub_HospitalCare",
+      "RelativePath": "Images/f9ca13ed-cdf3-461e-ab90-94c7fc288314_myphoto.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\f9ca13ed-cdf3-461e-ab90-94c7fc288314_myphoto.jpg"
     },
     {
       "Identity": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\favicon.ico",

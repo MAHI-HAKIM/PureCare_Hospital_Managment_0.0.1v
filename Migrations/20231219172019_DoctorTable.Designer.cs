@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PureCareHub_HospitalCare.Data;
 
@@ -11,9 +12,10 @@ using PureCareHub_HospitalCare.Data;
 namespace PureCareHub_HospitalCare.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20231219172019_DoctorTable")]
+    partial class DoctorTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,0 +1,133 @@
+﻿@model PureCareHub_HospitalCare.ViewModels.DoctorRegistrationViewModel
+
+<div class="container-fluid">
+    <div class="row">
+
+        @Html.Partial("~/Views/Shared/_AdminSidebarPartial.cshtml")
+
+        <main class="col-sm px-md-4">
+            <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Register Doctor</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group me-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        This week
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="wrapper wrapper--w480 custom-background">
+                <div class="card card-4">
+                    <div class="card-body">
+                        <h3 class="m-lg-3 my-2">Register</h3>
+                        <form enctype="multipart/form-data" id="registerForm" method="post">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-4">
+                                        <input asp-for="FirstName" class="form-control" autocomplete="on" aria-required="true" placeholder="First Name" />
+                                        <label asp-for="FirstName">First Name</label>
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-4">
+                                        <input asp-for="LastName" class="form-control" autocomplete="on" aria-required="true" placeholder="Last Name" />
+                                        <label asp-for="LastName">Last Name</label>
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+                           
+
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="PhoneNumber" class="form-control" autocomplete="on" aria-required="true" placeholder="" />
+                                        <label asp-for="PhoneNumber">Phone number</label>
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-4">
+                                        <input asp-for="Email" class="form-control" autocomplete="on" aria-required="true" placeholder="name@example.com" />
+                                        <label asp-for="Email">Email</label>
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label asp-for="Photo">Photo</label>
+                                    <div class="mb-3">
+                                        <input asp-for="Photo" type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label asp-for="WorkingShift">Working Shift</label>
+                                    <div class="form mb-3">
+                                        <select asp-for="WorkingShift" class="form-control">
+                                            @foreach (var shift in Enum.GetNames(typeof(ShiftType)))
+                                            {
+                                                <option value="@shift">@shift</option>
+                                            }
+                                        </select>
+                                        <span asp-validation-for="WorkingShift" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                     
+                                 
+                            <div class="row">
+                                <div class="col-6">
+                                    <label asp-for="DoctorGender">Gender</label>
+                                    <div class="form mb-3">
+                                        <select asp-for="DoctorGender" class="form-control">
+                                            @foreach (var gender in Enum.GetNames(typeof(Gender)))
+                                            {
+                                                <option value="@gender">@gender</option>
+                                            }
+                                        </select>
+                                        <span asp-validation-for="WorkingShift" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label asp-for="Department">Department</label>
+                                    <div class="form mb-5">
+                                        <select asp-for="Department" class="form-control">
+                                            @foreach (var department in Enum.GetNames(typeof(DepartmentType)))
+                                            {
+                                                <option value="@department">@department</option>
+                                            }
+                                        </select>
+                                        <span asp-validation-for="WorkingShift" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button id="registerSubmit" type="submit" class="btn btn-primary " style="width:180px">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<style>
+    .wrapper--w480
+    {
+        width:980px;
+        margin:auto;
+    }
+</style>

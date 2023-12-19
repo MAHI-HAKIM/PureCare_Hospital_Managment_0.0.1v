@@ -44,8 +44,6 @@ body {
 /*New Designs*/
 .navbar-scrolled {
     background-color: white;
-    /*opacity: 0.95;*/
-    color:white;
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
 }
 
@@ -108,6 +106,13 @@ body {
    font-size:20px;
     
 }*/
+/*--------------------------------------------------------------
+# Doctor Registration Form CSS
+--------------------------------------------------------------*/
+.custom-background {
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
