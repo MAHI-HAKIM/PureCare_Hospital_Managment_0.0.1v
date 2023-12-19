@@ -2224,6 +2224,70 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\css\site.css))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\12205f63-8062-4f87-99f1-58c0d7a2bb0d_about.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>PureCareHub_HospitalCare</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PureCareHub_HospitalCare</BasePath>
+      <RelativePath>Images/12205f63-8062-4f87-99f1-58c0d7a2bb0d_about.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\12205f63-8062-4f87-99f1-58c0d7a2bb0d_about.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\1319ba34-5631-4b59-a0ed-b43a42e66243_doc.Eman.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>PureCareHub_HospitalCare</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PureCareHub_HospitalCare</BasePath>
+      <RelativePath>Images/1319ba34-5631-4b59-a0ed-b43a42e66243_doc.Eman.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\1319ba34-5631-4b59-a0ed-b43a42e66243_doc.Eman.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\6a2e346d-f6c0-4599-b56b-3f1bb98e15a8_doctors-4.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>PureCareHub_HospitalCare</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PureCareHub_HospitalCare</BasePath>
+      <RelativePath>Images/6a2e346d-f6c0-4599-b56b-3f1bb98e15a8_doctors-4.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\6a2e346d-f6c0-4599-b56b-3f1bb98e15a8_doctors-4.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>PureCareHub_HospitalCare</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PureCareHub_HospitalCare</BasePath>
+      <RelativePath>Images/6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\about.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>PureCareHub_HospitalCare</SourceId>
@@ -2495,6 +2559,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\favicon.png))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\fcc4748d-24c2-44c9-a4b1-a295ebd1f66b_6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>PureCareHub_HospitalCare</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/PureCareHub_HospitalCare</BasePath>
+      <RelativePath>Images/fcc4748d-24c2-44c9-a4b1-a295ebd1f66b_6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\fcc4748d-24c2-44c9-a4b1-a295ebd1f66b_6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\gallery\gallery-1.jpg))">
       <SourceType>Package</SourceType>

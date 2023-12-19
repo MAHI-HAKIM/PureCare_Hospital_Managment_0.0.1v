@@ -5,6 +5,22 @@
       "PackagePath": "staticwebassets\\PureCareHub_HospitalCare.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\12205f63-8062-4f87-99f1-58c0d7a2bb0d_about.jpg",
+      "PackagePath": "staticwebassets\\Images\\12205f63-8062-4f87-99f1-58c0d7a2bb0d_about.jpg"
+    },
+    {
+      "Id": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\1319ba34-5631-4b59-a0ed-b43a42e66243_doc.Eman.jpg",
+      "PackagePath": "staticwebassets\\Images\\1319ba34-5631-4b59-a0ed-b43a42e66243_doc.Eman.jpg"
+    },
+    {
+      "Id": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\6a2e346d-f6c0-4599-b56b-3f1bb98e15a8_doctors-4.jpg",
+      "PackagePath": "staticwebassets\\Images\\6a2e346d-f6c0-4599-b56b-3f1bb98e15a8_doctors-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg",
+      "PackagePath": "staticwebassets\\Images\\6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg"
+    },
+    {
       "Id": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\about.jpg",
       "PackagePath": "staticwebassets\\Images\\about.jpg"
     },
@@ -71,6 +87,10 @@
     {
       "Id": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\favicon.png",
       "PackagePath": "staticwebassets\\Images\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\fcc4748d-24c2-44c9-a4b1-a295ebd1f66b_6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg",
+      "PackagePath": "staticwebassets\\Images\\fcc4748d-24c2-44c9-a4b1-a295ebd1f66b_6e8c5bc4-a67a-4ca0-9037-97a3ad0b4970_myphoto.jpg"
     },
     {
       "Id": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\gallery\\gallery-1.jpg",
