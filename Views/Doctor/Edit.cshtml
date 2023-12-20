@@ -1,40 +1,46 @@
 ﻿@model Doctor
 
 @{
-   var pathofPhoto = $"~/Images/{(!string.IsNullOrEmpty(Model.PhotoPath) ? Model.PhotoPath : "emanDoc.jpg")}";
-}
+    ViewBag.Title = "Edit Docto";
 
+    var photoPath = "~/Images/emanDoc.jpg";
+
+    if (Model != null && !string.IsNullOrEmpty(Model.PhotoPath))
+    {
+        photoPath = $"~/Images/{Model.PhotoPath}";
+    }
+
+}
 <div class="container-fluid">
     <div class="row">
 
-        @Html.Partial("~/Views/Shared/_AdminSidebarPartial.cshtml")
+        <div class="col-2 px-0">
+            <partial name="_AdminSidebarPartial" />
+        </div>
 
-        <main class="col-sm px-md-4">
+        <div class="col-10">
             <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Edit Doctor</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                    </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                        This week
-                    </button>
-                </div>
+                <h1 class="ml-5">Edit Doctor</h1>
             </div>
 
 
-            <div class="wrapper wrapper--w480 custom-background">
+            <div class="wrapper wrapper--w480 custom-background my-4 mx-5">
                 <div class="card card-4">
-                    <div class="card-body">
+                    <div class="card-body ">
                         <form enctype="multipart/form-data" id="editForm" method="post" asp-action="Edit">
-                            <input hidden asp-for="PhotoPath" />
+                            <input hidden asp-for="Id" />
+
                             <div class="row">
                                 <div class="col-2 mb-3">
-
-                                    <div><img src="@pathofPhoto" alt="" class="avatar-md rounded-circle img-thumbnail" asp-append-version="true" /></div>
+                                    @if (Model != null && !string.IsNullOrEmpty(photoPath))
+                                    {
+                                        <img src="@Url.Content(photoPath)" alt="user photo" class="avatar-md rounded-circle img-thumbnail" style="width:85px; height:85px" asp-append-version="true" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@Url.Content(photoPath)" alt="user photo" class="avatar-md rounded-circle img-thumbnail" asp-append-version="true" />
+                                    }
                                 </div>
 
                                 <div class="col-5 mt-2">
@@ -59,25 +65,25 @@
 
                             <div class="row">
                                 <div class="col-6">
-                                    <div class="form-floating mb-3">
-                                        <input asp-for="PhoneNumber" class="form-control" autocomplete="on" aria-required="true" placeholder="" />
-                                        <label asp-for="PhoneNumber">Phone number</label>
-                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-6">
                                     <div class="form-floating mb-4">
                                         <input asp-for="Email" class="form-control" autocomplete="on" aria-required="true" placeholder="name@example.com" />
                                         <label asp-for="Email">Email</label>
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                 </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="PhoneNumber" class="form-control" autocomplete="on" aria-required="true" placeholder="" />
+                                        <label asp-for="PhoneNumber">Phone number</label>
+                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <label asp-for="PhotoPath">Photo</label>
+                                    <label asp-for="PhotoPath ">Photo</label>
                                     <div class="mb-3">
-                                        <input asp-for="PhotoPath" type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                                        <input asp-for="PhotoPath" type="file" class="form-control .custom-file-input .custom-file-label" placeholde="Choose photo" id="photo" name="photo" accept="image/*">
                                     </div>
                                 </div>
 
@@ -126,38 +132,28 @@
                             <div class="text-center">
 
                                 <div class="text-center">
-                                    <div class="btn-group" style="width: 100%">
-                                        <a href="@Url.Action("List", "Doctor")" class="btn btn-success " style="width:120px">
+                                    <div class="btn-group" style="width: 65%">
+                                        <a href="@Url.Action("List", "Doctor")" class="btn btn-secondary mr-5" style="width: 120px">
                                             <i class="bx bx-user me-1"></i> Back
                                         </a>
-                                        <button id="registerSubmit" type="submit" class="btn btn-primary  mr-5" style="width:120px">Edit</button>
+                                        <button id="deleteSubmit" type="submit" class="btn btn-primary ml-5" style="width: 120px">
+                                            Edit
+                                        </button>
                                     </div>
                                     <input type="hidden" asp-for="Id" />
                                 </div>
-                            
-                                
+
+
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-        </main>
+        </div>
     </div>
 </div>
 
 <style>
-    .wrapper--w480 {
-        width: 980px;
-        margin: auto;
-    }
 
-    .avatar-md {
-        height: 5rem;
-        width: 5rem;
-    }
-
-    .width-50 {
-        width:300px;
-    }
 </style>

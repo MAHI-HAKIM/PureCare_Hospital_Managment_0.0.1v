@@ -23,15 +23,12 @@ namespace PureCareHub_HospitalCare.ViewModels
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
 
-        [Display(Name = "Profile Image")]
-        public string ProfileImage { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "Please select working shift.")]
         [Display(Name = "Working Shift")]
         public ShiftType WorkingShift { get; set; }
 
         [Required(ErrorMessage = "Please enter the department.")]
-        public string Department { get; set; } = string.Empty;
+        public DepartmentType Department { get; set; }
 
         public Gender DoctorGender { get; set; }
         public IFormFile? Photo { get; set; } 

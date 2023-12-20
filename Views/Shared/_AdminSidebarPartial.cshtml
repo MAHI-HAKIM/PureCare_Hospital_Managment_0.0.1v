@@ -1,44 +1,31 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
 <!-- AdminSidebarPartial.cshtml -->
-<nav id="sidebarMenu" class="col-auto px-sm-2 bg-gradient-light" style="height: 100vh">
-    <div class="position-sticky pt-3 sidebar-sticky px-2">
-        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start  px-3" id="menu">
+<nav id="sidebarMenu" class="bg-gradient-light d-flex flex-column align-items-center px-5" style="height: 100vh">
+    <div class="position-sticky pt-3 sidebar-sticky text-center">
+        <img src="~/Images/myphoto.jpg" alt="user photo" class="avatar-md rounded-circle img-thumbnail mb-3" asp-append-version="true" />
+        <h3 class="ml-3 mb-2" style="font-weight:bold">Menu</h3>
+        <div class="mb-3" style="border-bottom: 2px solid gray;"></div>
+
+        <ul class="nav flex-column" id="menu">
+
             <li class="nav-item mb-3 ">
-                <!-- Replace "Menu" text with a circular image -->
-                <img src="~/Images/myphoto.jpg" alt="Logo" width="100" height="100" class="rounded-circle " >
-                <h3 class ="ml-3 mt-3"style="font-weight:bold">Menu</h3>
-                <div class="col-auto" style="border-bottom: 2px solid gray;"></div>
-            </li>
-            
-            <li class="nav-item mb-3">
-                <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 ">
-                    <i class="fa fa-address-card  text-white"></i> <span class="ms-1 d-none d-sm-inline text-white">Patients</span> <i class="fa fa-caret-down  text-white ml-2" aria-hidden="true"></i>
+                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+                    <i class=" fa fa-user  text-white"></i> <span class="ms-1 d-none d-sm-inline text-white">Patients</span> <i class="fa fa-caret-down ml-2  text-white" aria-hidden="true"></i>
                 </a>
-                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                     <li class="w-100 nested-bar">
-                        <a href="#" class="nav-link px-0">
-                            <span class="d-none d-sm-inline" style="color:#c4cfcf;">Create patient</span>
-                        </a>
                     </li>
                     <li class="w-100 nested-bar">
-                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline" style="color:#c4cfcf;">Manage patient</span>  </a>
+                        <a class="nav-link px-0" href="#"> <span class="d-none d-sm-inline" style="color:#c4cfcf;">Add Patients</span></a>
                     </li>
                 </ul>
             </li>
 
             <li class="nav-item mb-3 ">
-                <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                    <i class=" fa fa-user-md  text-white"></i> <span class="ms-1 d-none d-sm-inline  text-white">Doctors</span> <i class="fa fa-caret-down ml-2  text-white" aria-hidden="true"></i>
-                </a>
-                <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                    <li class="w-100 nested-bar">
-                        <a class="nav-link px-0" asp-area="" asp-controller="Doctor" asp-action="List" > <span class="d-none d-sm-inline" style="color:#c4cfcf;">List Doctor</span> </a>
-                    </li>
-                    <li class="w-100 nested-bar">
-                       <a class="nav-link px-0" asp-area="" asp-controller="Doctor" asp-action="Create"> <span class="d-none d-sm-inline" style="color:#c4cfcf;">Add Doctor</span></a>
-                    </li>
-                </ul>
+                    <a class="nav-link px-0" asp-area="" asp-controller="Doctor" asp-action="List">
+                    <i class=" fa fa-user-md  text-white"></i> <span class="ms-1 d-none d-sm-inline  text-white">Doctors List</span> 
+                    </a>
             </li>
 
             <li class="nav-item mb-3">
