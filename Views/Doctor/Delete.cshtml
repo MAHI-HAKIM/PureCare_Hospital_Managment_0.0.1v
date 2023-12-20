@@ -1,5 +1,144 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+@* @model PureCareHub_HospitalCare.ViewModels.DoctorEditViewModel *@
+
+@model Doctor
+
 @{
+    ViewBag.Title = "Edit Docto";
+
+    var photoPath = "~/Images/emanDoc.jpg";
+
+    if (Model != null && !string.IsNullOrEmpty(Model.PhotoPath))
+    {
+        photoPath = $"~/Images/{Model.PhotoPath}";
+    }
+
 }
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-2 px-0">
+            <partial name="_AdminSidebarPartial" />
+        </div>
+
+        <div class="col-10">
+            <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="ml-4">Delete Doctor</h1>
+               
+            </div>
+
+
+            <div class="wrapper wrapper--w480 custom-background my-4 mx-5">
+                <div class="card card-4">
+                    <div class="card-body">
+                        <form enctype="multipart/form-data" id="editForm" method="post" asp-action="Delete">
+                            <input hidden asp-for="Id" />
+                            @* <input hidden asp-for="ExistingPhotoPath" /> *@
+
+                            <div class="row">
+                                <div class="col-2 mb-3">
+                                    @if (Model != null && !string.IsNullOrEmpty(photoPath))
+                                    {
+                                        <img src="@Url.Content(photoPath)" alt="user photo" class="avatar-mid rounded-circle img-thumbnail" asp-append-version="true" />
+                                    }
+                                    else
+                                    {
+                                        <img src="@Url.Content(photoPath)" alt="user photo" class="avatar-mid rounded-circle img-thumbnail" asp-append-version="true" />
+                                    }
+                                </div>
+
+                                <div class="col-5 mt-2">
+
+                                    <div class="form-floating mb-4">
+                                        <input asp-for="FirstName" class="form-control" disabled autocomplete="on" aria-required="true" placeholder="First Name" />
+                                        <label asp-for="FirstName">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-5 mt-2">
+                                    <div class="form-floating mb-4 ">
+                                        <input asp-for="LastName" class="form-control" disabled autocomplete="on" aria-required="true" placeholder="Last Name" />
+                                        <label asp-for="LastName">Last Name</label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-floating mb-4">
+                                        <input asp-for="Email" class="form-control" disabled autocomplete="on" aria-required="true" placeholder="name@example.com" />
+                                        <label asp-for="Email">Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="PhoneNumber" class="form-control" disabled autocomplete="on" aria-required="true" placeholder="" />
+                                        <label asp-for="PhoneNumber">Phone number</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label asp-for="DoctorGender">Gender</label>
+                                    <div class="form mb-3">
+                                        <select asp-for="DoctorGender" disabled class="form-control">
+                                            @foreach (var gender in Enum.GetNames(typeof(Gender)))
+                                            {
+                                                <option value="@gender">@gender</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <label asp-for="WorkingShift">Working Shift</label>
+                                    <div class="form mb-3">
+                                        <select asp-for="WorkingShift" disabled class="form-control">
+                                            @foreach (var shift in Enum.GetNames(typeof(ShiftType)))
+                                            {
+                                                <option value="@shift">@shift</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label asp-for="Department">Department</label>
+                                    <div class="form mb-5">
+                                        <select asp-for="Department"  disabled class="form-control">
+                                            @foreach (var department in Enum.GetNames(typeof(DepartmentType)))
+                                            {
+                                                <option value="@department">@department</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                              
+                            </div>
+                            <div class="text-center">
+                                <div class="btn-group" style="width: 65%">
+                                    <a href="@Url.Action("List", "Doctor")" class="btn btn-secondary mr-5" style="width: 120px">
+                                        <i class="bx bx-user me-1"></i> Back
+                                    </a>
+                                    <button id="deleteSubmit" type="submit" class="btn btn-danger ml-5" style="width: 120px">
+                                        Delete
+                                    </button>
+                                </div>
+                                <input type="hidden" asp-for="Id" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
