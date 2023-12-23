@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PureCareHub_HospitalCare.Models
 {
     public class Doctor
     {
         public int Id { get; set; }
+
+        // Add navigation property to represent the relationship with appointments
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
 
         [Required(ErrorMessage = "Please enter the doctor's first name.")]
         [Display(Name = "First Name")]
@@ -28,7 +32,11 @@ namespace PureCareHub_HospitalCare.Models
         [Required(ErrorMessage = "Please select working shift.")]
         [Display(Name = "Working Shift")]
         public ShiftType WorkingShift { get; set; }
-        public DepartmentType Department { get; set; }
+        //public DepartmentType Department { get; set; }
+        [Required(ErrorMessage = "Please select Department")]
+        [Display(Name = "Department")]
+        public int depID { get; set; }
+        public Department ?department { get; set; }
         public Gender DoctorGender { get; set; }
 
     }

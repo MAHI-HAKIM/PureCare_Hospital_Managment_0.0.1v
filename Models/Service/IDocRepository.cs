@@ -16,5 +16,7 @@
 
         // Delete a doctor by ID
         Doctor Delete(int doctorId);
+
+        string GetDepartmentName(int departmentId);
     }
 }

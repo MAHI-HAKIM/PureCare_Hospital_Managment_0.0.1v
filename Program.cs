@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using PureCareHub_HospitalCare.Data;
 using PureCareHub_HospitalCare.Areas.Identity.Data;
+using PureCareHub_HospitalCare.Models.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ var connectionString = builder.Configuration.GetConnectionString("DBContextConne
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<IDocRepository, DocRepository>();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
 	.AddEntityFrameworkStores<ApplicationDBContext>();

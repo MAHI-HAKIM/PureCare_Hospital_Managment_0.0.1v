@@ -21,7 +21,7 @@ namespace PureCareHub_HospitalCare.Models.Service
 
         Doctor IDocRepository.Delete(int doctorId)
         {
-            Doctor doctor = context.doctors.Find(doctorId);
+            Doctor ?doctor = context.doctors.Find(doctorId);
             if(doctor != null)
             {
                 context.doctors.Remove(doctor);
@@ -48,6 +48,18 @@ namespace PureCareHub_HospitalCare.Models.Service
             context.SaveChanges();
             return doctorChange;
         }
-      
+        string IDocRepository.GetDepartmentName(int departmentId)
+        {
+            var department = context.Departments.FirstOrDefault(d => d.Id == departmentId);
+
+            // Check if the department is found
+            if (department != null)
+            {
+                return department.DepartmentName;
+            }
+
+            // If the department is not found, return a default value or handle it accordingly
+            return "Department Not Found";
+        }
     }
 }

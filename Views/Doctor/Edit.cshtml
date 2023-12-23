@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <label asp-for="Department">Department</label>
+                                    @* <label asp-for="Department">Department</label>
                                     <div class="form mb-5">
                                         <select asp-for="Department" class="form-control">
                                             @foreach (var department in Enum.GetNames(typeof(DepartmentType)))
@@ -126,7 +126,7 @@
                                             }
                                         </select>
                                         <span asp-validation-for="WorkingShift" class="text-danger"></span>
-                                    </div>
+                                    </div> *@
                                 </div>
                             </div>
                             <div class="text-center">

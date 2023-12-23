@@ -129,8 +129,6 @@ namespace PureCareHub_HospitalCare.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -147,6 +145,8 @@ namespace PureCareHub_HospitalCare.Areas.Identity.Pages.Account
                     var patient = new Patient
                     {
                         UserId = user.Id,
+                        FirstName = Input.FirstName,
+                        LastName = Input.LastName,
                         // Set other properties of the patient...
                     };
 

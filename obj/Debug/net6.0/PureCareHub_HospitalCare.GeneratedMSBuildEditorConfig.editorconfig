@@ -48,6 +48,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/Appointment/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/Appointment/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcU3VjY2Vzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/Appointment/_DoctorsDropdownPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcX0RvY3RvcnNEcm9wZG93blBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/Department/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/Department/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/Doctor/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -74,6 +94,26 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/Doctor/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/D/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/D/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/D/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/D/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/D/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/mahia/Desktop/PureCareHub_HospitalCare/Views/Home/Index.cshtml]

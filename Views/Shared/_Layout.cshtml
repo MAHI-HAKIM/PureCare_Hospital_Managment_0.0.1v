@@ -78,6 +78,11 @@
                         <li class="nav-item">
                             <a class="nav-link mr-3 text-dark" asp-area="" asp-controller="Doctor" asp-action="List">Manage</a>
                         </li>
+                    }else if(User.IsInRole("Patient"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link mr-3 text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Appointment</a>
+                        </li>
                     }
                 </ul>
 

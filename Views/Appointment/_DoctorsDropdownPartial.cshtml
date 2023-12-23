@@ -1,0 +1,11 @@
+﻿@model SelectList
+
+@{
+    // Use the SelectList to populate the dropdown options
+}
+
+<option value="">Select Doctor</option>
+@foreach (var item in Model)
+{
+    <option value="@item.Value">@item.Text</option>
+}

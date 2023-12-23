@@ -1,10 +1,13 @@
-﻿using PureCareHub_HospitalCare.Models;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using PureCareHub_HospitalCare.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Policy;
 
 namespace PureCareHub_HospitalCare.ViewModels
 {
     public class DoctorRegistrationViewModel
     {
+
         [Required(ErrorMessage = "Please enter the doctor's first name.")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; } = string.Empty;
@@ -27,9 +30,10 @@ namespace PureCareHub_HospitalCare.ViewModels
         [Display(Name = "Working Shift")]
         public ShiftType WorkingShift { get; set; }
 
-        [Required(ErrorMessage = "Please enter the department.")]
-        public DepartmentType Department { get; set; }
-
+        [Required(ErrorMessage = "Please select the department.")]
+        [Display(Name = "Department")]
+        public int SelectedDepartmentId { get; set; }
+        public SelectList? DepartmentsList { get; set; }
         public Gender DoctorGender { get; set; }
         public IFormFile? Photo { get; set; } 
 

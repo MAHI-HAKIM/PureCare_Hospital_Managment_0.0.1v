@@ -5,6 +5,8 @@ using PureCareHub_HospitalCare.ViewModels;
 using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 using PureCareHub_HospitalCare.Models.Service;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace PureCareHub_HospitalCare.Controllers
 {
@@ -13,26 +15,59 @@ namespace PureCareHub_HospitalCare.Controllers
         //private readonly IDocRepository _docRepository;
         private readonly ApplicationDBContext _dbContext;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IDocRepository _docRepository;
 
 
         //private readonly 
         [Obsolete]
         public DoctorController(ApplicationDBContext dbContext,
-                                IWebHostEnvironment webHostEnvironment)
+                                IWebHostEnvironment webHostEnvironment,
+                                IDocRepository docRepository)
         { 
             _dbContext = dbContext;
             _webHostEnvironment = webHostEnvironment;
+            _docRepository = docRepository;
         }
         public IActionResult Index()
         {
             var objDocotr = _dbContext.doctors.ToList();
-            return View(objDocotr);
+            var doctorViewModels = new List<DoctorViewModel>();
+           
+
+            foreach (var doctor in objDocotr)
+            {
+                var departmentName = _docRepository.GetDepartmentName(doctor.depID);
+                doctorViewModels.Add(new DoctorViewModel { doctor = doctor, DepartmentName = departmentName });
+            }
+
+            return View(doctorViewModels);
+        }
+        [HttpGet]
+        public IActionResult List()
+        {
+            var objDocotr = _dbContext.doctors.ToList();
+            var doctorViewModels = new List<DoctorViewModel>();
+
+
+            foreach (var doctor in objDocotr)
+            {
+                var departmentName = _docRepository.GetDepartmentName(doctor.depID);
+                doctorViewModels.Add(new DoctorViewModel { doctor = doctor, DepartmentName = departmentName });
+            }
+
+            return View(doctorViewModels);
         }
 
         [HttpGet]
         public ViewResult Create()
         {
-            return View();
+            var viewModel = new DoctorRegistrationViewModel {
+                DepartmentsList = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName")
+            };
+
+            ViewData["DepartmentID"] = new SelectList(_dbContext.Departments, "Id", "DepartmentName");
+
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult Create(DoctorRegistrationViewModel model)
@@ -48,7 +83,7 @@ namespace PureCareHub_HospitalCare.Controllers
                     PhoneNumber = model.PhoneNumber,
                     Email = model.Email,
                     WorkingShift = model.WorkingShift,
-                    Department = model.Department,
+                    depID = model.SelectedDepartmentId,
                     DoctorGender = model.DoctorGender,
                     PhotoPath = uniqueFilename
                 };
@@ -110,7 +145,7 @@ namespace PureCareHub_HospitalCare.Controllers
             if (ModelState.IsValid)
             {
 
-                Doctor doctor = _dbContext.doctors.Find(model.Id);
+                Doctor ?doctor = _dbContext.doctors.Find(model.Id);
 
                 if (doctor == null)
                 {
@@ -122,7 +157,7 @@ namespace PureCareHub_HospitalCare.Controllers
                 doctor.PhoneNumber = model.PhoneNumber;
                 doctor.Email = model.Email;
                 doctor.WorkingShift = model.WorkingShift;
-                doctor.Department = model.Department;
+                //doctor.Department = model.Department;
                 doctor.DoctorGender = model.DoctorGender;
 
                 if(model.Photo != null)
@@ -151,11 +186,8 @@ namespace PureCareHub_HospitalCare.Controllers
             }
             return View();
         }
-        public IActionResult List()
-        {
-            var model = _dbContext.doctors.ToList();
-            return View(model);
-        }
+     
+
 
         [HttpGet]
         public IActionResult Delete(int? docid)

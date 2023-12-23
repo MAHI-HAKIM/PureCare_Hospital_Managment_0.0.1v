@@ -1,4 +1,7 @@
-﻿@model PureCareHub_HospitalCare.ViewModels.DoctorRegistrationViewModel
+﻿@* @model Doctor *@
+
+@model PureCareHub_HospitalCare.ViewModels.DoctorRegistrationViewModel
+
 
 <div class="container-fluid">
     <div class="row">
@@ -87,20 +90,15 @@
                                                 <option value="@gender">@gender</option>
                                             }
                                         </select>
-                                        <span asp-validation-for="WorkingShift" class="text-danger"></span>
+                                        <span asp-validation-for="DoctorGender" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <label asp-for="Department">Department</label>
                                     <div class="form mb-5">
-                                        <select asp-for="Department" class="form-control">
-                                            @foreach (var department in Enum.GetNames(typeof(DepartmentType)))
-                                            {
-                                                <option value="@department">@department</option>
-                                            }
-                                        </select>
-                                        <span asp-validation-for="WorkingShift" class="text-danger"></span>
+                                        <label asp-for="SelectedDepartmentId" class="control-label"></label>
+                                        <select asp-for="SelectedDepartmentId" class="form-control" asp-items="Model.DepartmentsList"></select>
                                     </div>
+                                    <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span>
                                 </div>
                             </div>
                                 <div class="text-center">

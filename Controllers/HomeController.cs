@@ -14,6 +14,7 @@ namespace PureCareHub_HospitalCare.Controllers
 			_logger = logger;
 		}
 
+		[HttpGet]
 		public IActionResult Index()
 		{
 			return View();
