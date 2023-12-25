@@ -8,8 +8,8 @@
         </p>
     </div>
     <div class="container aos-init aos-animate" data-aos="fade-up">
-        
-        <form method="post" asp-action="Index">
+
+        <form method="post" asp-action="AdminAppointment">
             @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
             <input type="hidden" asp-for="PatientId" />
 
@@ -29,15 +29,15 @@
             </div>
             <div class="row">
                 <div class="col-md-4 form-group mt-2">
-                <label asp-for="AppointmentDate"></label>
+                    <label asp-for="AppointmentDate"></label>
                     <input asp-for="AppointmentDate" class="form-control" type="date" aria-required="true" placeholder="appointment date" />
                     <span asp-validation-for="AppointmentDate" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group mt-2">
-                        <label asp-for="SelectedDepartmentId" class="control-label"></label>
-                        <select asp-for="SelectedDepartmentId" class="form-select" id="departmentID" asp-items="Model.ListofDepartments">
-                               <option disabled selected>Select Departments</option>
-                       </select>
+                    <label asp-for="SelectedDepartmentId" class="control-label"></label>
+                    <select asp-for="SelectedDepartmentId" class="form-select" id="departmentID" asp-items="Model.ListofDepartments">
+                        <option disabled selected>Select Departments</option>
+                    </select>
                     <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span>
                 </div>
 

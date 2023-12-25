@@ -24,12 +24,10 @@ namespace PureCareHub_HospitalCare.ViewModels
         [Display(Name = "Patient Contact Number")]
         [DataType(DataType.PhoneNumber)]
         public string patientContactNumber { get; set; } = string.Empty;
-        public int PatientId { get; set; }
+        public int ?PatientId { get; set; }
 
         // Foreign key to link with Doctor
-        [Required(ErrorMessage = "Please select a doctor.")]
-        [Display(Name = "Select Doctor")]
-        public int DoctorId { get; set; }
+        
 
         [Required(ErrorMessage = "Please Select a Department.")]
 		[Display(Name = "Select Department")]
@@ -39,9 +37,11 @@ namespace PureCareHub_HospitalCare.ViewModels
 
         public string departmentName { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "Please select a doctor.")]
+        public int DoctorId { get; set; }
         public Doctor ?assingedDoctor { get; set; }
 
         // Additional string property for any extra information
-        public string ?AdditionalInfo { get; set; }
+        public string ?AdditionalInfo { get; set; } = string.Empty;
     }
 }

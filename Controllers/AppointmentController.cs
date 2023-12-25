@@ -38,7 +38,6 @@ namespace PureCareHub_HospitalCare.Controllers
                 // You might want to redirect to an error page or take some other action
                 return NotFound();
             }
-
             var doctorsList = _dbContext.doctors.ToList();
 
             var viewModel = new AppointmentRegistationViewModel
@@ -49,21 +48,16 @@ namespace PureCareHub_HospitalCare.Controllers
                 AppointmentDate = DateTime.Now,
                 ListofDepartments = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName")
             };
-
             return View(viewModel);
-
-          
         }
 
-		[ValidateAntiForgeryToken]
+        
+       
+
+        [ValidateAntiForgeryToken]
 		[HttpPost]
         public IActionResult Index(AppointmentRegistationViewModel model)
         {
-            //model.ListofDepartments = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
-            //foreach (var error in ModelState["SelectedDepartmentId"].Errors)
-            //{
-            //    Console.WriteLine($"ModelState Error for SelectedDepartmentId: {error.ErrorMessage}");
-            //}
             foreach (var entry in ModelState)
             {
                 foreach (var error in entry.Value.Errors)
@@ -75,11 +69,57 @@ namespace PureCareHub_HospitalCare.Controllers
             {
                 return RedirectToAction("Success", model);
             }
-
             model.ListofDepartments = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
-
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult AdminAppointment()
+        {
+            var viewModel = new AppointmentRegistationViewModel
+            {
+                AppointmentDate = DateTime.Now,
+                ListofDepartments = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName")
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult AdminAppointment(AppointmentRegistationViewModel model)
+        {
+            foreach (var entry in ModelState)
+            {
+                foreach (var error in entry.Value.Errors)
+                {
+                    Console.WriteLine($"Model Error for {entry.Key}: {error.ErrorMessage}");
+                }
+            }
+            if (ModelState.IsValid)
+            {
+				Appointment appointment = new Appointment
+				{
+					AppointmentDate = model.AppointmentDate,
+					patientFirstname = model.patientFirstname,
+					patientLastName = model.patientLastName,
+					patientContactNumber = model.patientContactNumber,
+                    //PatientId = model.PatientId,
+					DoctorId = model.DoctorId,
+					AdditionalInfo = model.AdditionalInfo
+				};
+
+				appointment.PatientId = null;
+
+				_dbContext.Add(appointment);
+				_dbContext.SaveChanges();
+				ViewData["AppointmentDetails"] = appointment;
+				ViewData["PageTitle"] = "Appointment Detail";
+				TempData["Success"] = "You have successfully made an appointment";
+
+				return RedirectToAction("List");
+            }
+            model.ListofDepartments = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult Success(AppointmentRegistationViewModel model)
         {
@@ -113,10 +153,27 @@ namespace PureCareHub_HospitalCare.Controllers
             ViewData["PageTitle"] = "Appointment Detail";
             TempData["Success"] = "You have successfully made an appointment";
 
-            // Redirect to the "Index" action of the "Home" controller
-            return RedirectToAction("Index", "Home");
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                // Redirect to "Appointment/List" for Admin
+                return RedirectToAction("List", "Appointment");
+            }
+            else
+            {
+                // Redirect to "MedicalHistory/Index" for others (assuming they are patients)
+                return RedirectToAction("Index", "MedicalHistory");
+            }
         }
-        public JsonResult getDoctorsByDepartmentType(int  departmentID)
+        [HttpGet]
+		public IActionResult List()
+		{
+            var appointments = _dbContext.appointments.Include(a=>a.AssociatedDoctor).Include(a=>a.Patient).ToList();
+
+			return View(appointments);
+		}
+
+
+		public JsonResult getDoctorsByDepartmentType(int  departmentID)
         {
             return Json(_dbContext.doctors.Where(d => d.depID == departmentID).ToList());
         }

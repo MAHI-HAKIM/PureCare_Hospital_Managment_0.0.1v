@@ -4,6 +4,8 @@ namespace PureCareHub_HospitalCare.ViewModels
 {
     public class MedicalHistoryViewModel
     {
-        public List<Appointment>? Appointments { get; set; }
+        public Appointment? appointments { get; set; }
+        public Doctor? appointedDoctor { get; set; }
+        public string ? DepartmentName {  get; set; }
     }
 }

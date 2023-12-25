@@ -1,7 +1,7 @@
-﻿@model Appointment
+﻿@model PureCareHub_HospitalCare.ViewModels.MedicalHistoryViewModel
 
 @{
-    var photoPath = $"~/Images/{(!string.IsNullOrEmpty(Model.AssociatedDoctor.PhotoPath) ? Model.AssociatedDoctor.PhotoPath : "emanDoc.jpg")}";
+    var photoPath = $"~/Images/{(!string.IsNullOrEmpty(Model.appointedDoctor.PhotoPath) ? Model.appointedDoctor.PhotoPath : "emanDoc.jpg")}";
     string textColorClass;
 }
 <div class="container-xl px-4 mt-4">
@@ -20,7 +20,7 @@
                     <!-- Profile picture image-->
                     @* <img class="img-account-profile rounded-circle mb-2" src="@Model.assingedDoctor.PhotoPath" alt=""style="width:4rem;height:4rem"> *@
 
-                    @switch (Model.AssociatedDoctor.DoctorGender)
+                    @switch (Model.appointedDoctor.DoctorGender)
                     {
                         case Gender.Male:
                             textColorClass = "#59aef0"; // You can change this to your cool bluish color
@@ -37,14 +37,14 @@
                     <div><img src="@photoPath" alt="" class="avatar-mid rounded-circle img-thumbnail" asp-append-version="true" /></div>
                     @* <span class="badge badge-soft-success my-3">@Model.departmentName</span> *@
                     <div class="flex-1 ms-3">
-                        <h4 style="font-weight:bold"><a href="#" class="text-dark">Dr @Model.AssociatedDoctor.FirstName @Model.AssociatedDoctor.FirstName</a></h4>
-                        @* <span class="badge badge-soft-success mb-0">@Model.assingedDoctor.Department</span> *@
+                        <h4 style="font-weight:bold"><a href="#" class="text-dark">Dr @Model.appointedDoctor.FirstName @Model.appointedDoctor.FirstName</a></h4>
+                        <span class="badge badge-soft-success mb-0">@Model.DepartmentName</span>
                     </div>
                     @* </div> *@
                     <div class="mt-3 pt-1">
-                        <p class="text-muted mb-0 mt-2 text-truncate">@Model.AssociatedDoctor.Email</p>
-                        <p class="text-muted mb-0 text-truncate">@Model.AssociatedDoctor.PhoneNumber</p>
-                        <p class=" mb-0 mt-2 text-truncate" style="color:@textColorClass;font-weight:600"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2"></i> @Model.AssociatedDoctor.DoctorGender</p>
+                        <p class="text-muted mb-0 mt-2 text-truncate">@Model.appointedDoctor.Email</p>
+                        <p class="text-muted mb-0 text-truncate">@Model.appointedDoctor.PhoneNumber</p>
+                        <p class=" mb-0 mt-2 text-truncate" style="color:@textColorClass; font-weight:600"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2"></i> @Model.appointedDoctor.DoctorGender</p>
                     </div>
 
                 </div>
@@ -61,11 +61,11 @@
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1">First Name</label>
-                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.patientFirstname">
+                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.appointments.patientFirstname">
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1">Last Name</label>
-                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.patientLastName">
+                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.appointments.patientLastName">
                             </div>
                             <!-- Form Group (last name)-->
                         </div>
@@ -74,22 +74,31 @@
                             <!-- Form Group (organization name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1">Phone Number</label>
-                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.patientContactNumber">
+                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.appointments.patientContactNumber">
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1">Appointment Date</label>
-                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.AppointmentDate">
+                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.appointments.AppointmentDate">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputLocation">Additional Info</label>
-                                <textarea disabled class="form-control">@Model.AdditionalInfo</textarea>
+                                <textarea disabled class="form-control">@Model.appointments.AdditionalInfo</textarea>
                             </div>
              
                         </div>
                       
-                        <div class="col-12 mt-3">
-                            <a asp-controller="Appointment" asp-action="Index" class="btn btn-outline-secondary float-end me-2">Go back</a>
-                        </div>
+                        @if (User.IsInRole("Patient"))
+                        {
+                            <div class="col-12 mt-3">
+                                <a asp-controller="MedicalHistory" asp-action="Index" class="btn btn-outline-secondary float-end me-2">Go back</a>
+                            </div>
+                        }else
+                        {
+                            <div class="col-12 mt-3">
+                                <a asp-controller="Appointment" asp-action="List" class="btn btn-outline-secondary float-end me-2">Go back</a>
+                            </div>
+                        }
+
                     </form>
                 </div>
             </div>

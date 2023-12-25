@@ -27,7 +27,7 @@ namespace PureCareHub_HospitalCare.Models
         //public ICollection<MedicalHistory>? MedicalHistories { get; set; }
 
         // Foreign key to link with ApplicationUser
-        public string UserId { get; set; } = string.Empty;
+        public string UserId { get; set; } 
         public ApplicationUser? User { get; set; }
     }
 }

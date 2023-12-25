@@ -37,7 +37,7 @@ namespace PureCareHub_HospitalCare.Models
 
         // Navigation property to represent the relationship with the Doctor model
         // Foreign key to link with Patient
-        public int PatientId { get; set; }
+        public int ?PatientId { get; set; }
         public Patient? Patient { get; set; }
 
         // Foreign key to link with Doctor
@@ -47,7 +47,7 @@ namespace PureCareHub_HospitalCare.Models
         public Doctor? AssociatedDoctor { get; set; }
 
         // Additional string property for any extra information
-        public string AdditionalInfo { get; set; } = string.Empty;
+        public string ?AdditionalInfo { get; set; } = string.Empty;
     }
   
 }

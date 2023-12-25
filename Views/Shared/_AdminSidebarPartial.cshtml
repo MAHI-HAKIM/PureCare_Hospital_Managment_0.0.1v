@@ -17,19 +17,19 @@
                     <li class="w-100 nested-bar">
                     </li>
                     <li class="w-100 nested-bar">
-                        <a class="nav-link px-0" href="#"> <span class="d-none d-sm-inline" style="color:#c4cfcf;">Add Patients</span></a>
+                        <a class="nav-link px-0" asp-area="" asp-controller="Admin" asp-action="PatientList"> <span class="d-none d-sm-inline" style="color:#c4cfcf;">Add Patients</span></a>
                     </li>
                 </ul>
             </li>
 
             <li class="nav-item mb-3 ">
                     <a class="nav-link px-0" asp-area="" asp-controller="Doctor" asp-action="List">
-                    <i class=" fa fa-user-md  text-white"></i> <span class="ms-1 d-none d-sm-inline  text-white">Doctors List</span> 
+                    <i class=" fa fa-user-md  text-white"></i> <span class="ms-1 d-none d-sm-inline  text-white">DoctorsList</span> 
                     </a>
             </li>
 
             <li class="nav-item mb-3">
-                <a href="#" class="nav-link px-0 align-middle">
+                <a asp-area="" asp-controller="Appointment" asp-action="List" class="nav-link px-0 align-middle">
                     <i class="fa fa-tasks  text-white"></i> <span class="ms-1 d-none d-sm-inline  text-white">Appointment</span>
                 </a>
             </li>
@@ -48,3 +48,4 @@
         <hr>
     </div>
 </nav>
+

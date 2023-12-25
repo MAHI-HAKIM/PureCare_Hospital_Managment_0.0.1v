@@ -4,13 +4,22 @@
     <div class="ml-5">
 
     </div>
-    <div class="container-fluid hero-container ml-5">
+    <div class="container-fluid hero-container" style="margin-left:150px">
         <h1>
             Welcome to <span style="font-weight:bold;color:deepskyblue;font-style:inherit">Pure</span><span style="font-weight:bolder; color:lawngreen;font-style:italic">Care</span>
         </h1>
         <h2><span style="font-weight:bold"> Your Trusted Partner in Healthcare </span></h2>
-        <a href="/Identity/Account/Register" class="btn-get-started scrollto ml-5" style="text-decoration: none;">Get Started</a>
-    </div>
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+            {
+                <!-- User is logged in as a patient, show "Take an Appointment" -->
+                <a href="/Appointment/Index" class="btn-get-started " style="text-decoration: none;">Take an Appointment</a>
+            }
+            else
+            {
+                <!-- User is not logged in or not a patient, show "Get Started" -->
+                <a href="/Identity/Account/Register" class="btn-get-started " style="text-decoration: none;">Get Started</a>
+            }
+        </div>
 </section>
 
   <!-- ======= Why Us Section ======= -->
