@@ -12,8 +12,8 @@ using PureCareHub_HospitalCare.Data;
 namespace PureCareHub_HospitalCare.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231223140028_FKDoc_dep")]
-    partial class FKDoc_dep
+    [Migration("20231224174456_updateDepartment")]
+    partial class updateDepartment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -94,7 +94,6 @@ namespace PureCareHub_HospitalCare.Migrations
                 table: "patients",
                 column: "UserId");
         }
-
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

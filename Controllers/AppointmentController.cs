@@ -5,6 +5,7 @@ using PureCareHub_HospitalCare.Data;
 using PureCareHub_HospitalCare.Models;
 using PureCareHub_HospitalCare.Models.Service;
 using PureCareHub_HospitalCare.ViewModels;
+using System.Numerics;
 using System.Security.Claims;
 
 namespace PureCareHub_HospitalCare.Controllers
@@ -12,10 +13,14 @@ namespace PureCareHub_HospitalCare.Controllers
     public class AppointmentController : Controller
     {
         private readonly ApplicationDBContext _dbContext;
-        private  Patient? patient;
-        public AppointmentController(ApplicationDBContext dBContext)
+        private readonly IDocRepository _docRepository;
+        
+        public AppointmentController(ApplicationDBContext dBContext,
+                                     IDocRepository docRepository)
         {
             _dbContext = dBContext;
+            _docRepository = docRepository;
+
         }
 
         [HttpGet]
@@ -35,8 +40,6 @@ namespace PureCareHub_HospitalCare.Controllers
             }
 
             var doctorsList = _dbContext.doctors.ToList();
-            var department = _dbContext.Departments.ToList();
-
 
             var viewModel = new AppointmentRegistationViewModel
             {
@@ -44,16 +47,23 @@ namespace PureCareHub_HospitalCare.Controllers
                 patientFirstname = patient.FirstName,
                 patientLastName = patient.LastName,
                 AppointmentDate = DateTime.Now,
-                DepartmentsList = new SelectList(department, "Id", "DepartmentName")
+                ListofDepartments = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName")
             };
 
             return View(viewModel);
 
           
         }
-        [HttpPost]
+
+		[ValidateAntiForgeryToken]
+		[HttpPost]
         public IActionResult Index(AppointmentRegistationViewModel model)
         {
+            //model.ListofDepartments = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
+            //foreach (var error in ModelState["SelectedDepartmentId"].Errors)
+            //{
+            //    Console.WriteLine($"ModelState Error for SelectedDepartmentId: {error.ErrorMessage}");
+            //}
             foreach (var entry in ModelState)
             {
                 foreach (var error in entry.Value.Errors)
@@ -66,12 +76,15 @@ namespace PureCareHub_HospitalCare.Controllers
                 return RedirectToAction("Success", model);
             }
 
-            return View();
+            model.ListofDepartments = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
+
+            return View(model);
         }
         [HttpGet]
         public IActionResult Success(AppointmentRegistationViewModel model)
         {
             model.assingedDoctor = _dbContext.doctors.Find(model.DoctorId);
+            model.departmentName = _docRepository.GetDepartmentName(model.SelectedDepartmentId);
             return View(model);
         }
 
@@ -107,18 +120,5 @@ namespace PureCareHub_HospitalCare.Controllers
         {
             return Json(_dbContext.doctors.Where(d => d.depID == departmentID).ToList());
         }
-
-        //public IActionResult GetDoctorsByDepartment(DepartmentType department)
-        //{
-        //    //var doctors = _dbContext.doctors
-        //    //    .Where(d => d.Department == department)
-        //    //    .ToList();
-
-        //    //var doctorsSelectList = new SelectList(doctors, "Id", "FirstName");
-
-        //    //return PartialView("_DoctorDropdown", doctors);
-        //}
-
-
     }
 }

@@ -41,6 +41,8 @@ namespace PureCareHub_HospitalCare.Models
         public Patient? Patient { get; set; }
 
         // Foreign key to link with Doctor
+        [Required(ErrorMessage = "Please Select a doctor")]
+        [Display(Name = "Doctor")]
         public int DoctorId { get; set; }
         public Doctor? AssociatedDoctor { get; set; }
 

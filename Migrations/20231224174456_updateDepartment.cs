@@ -4,7 +4,7 @@
 
 namespace PureCareHub_HospitalCare.Migrations
 {
-    public partial class FKDoc_dep : Migration
+    public partial class updateDepartment : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

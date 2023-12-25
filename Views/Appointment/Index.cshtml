@@ -9,7 +9,8 @@
     </div>
     <div class="container aos-init aos-animate" data-aos="fade-up">
         
-        <form  method="post" role="form"  data-aos="fade-up" data-aos-delay="100" asp-action="Index">
+        <form method="post" asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PatientId" />
 
             <div class="row">
@@ -33,11 +34,14 @@
                     <span asp-validation-for="AppointmentDate" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group mt-2">
-                    <label for="DepartmentId" class="form-label">Select Department</label>
-                    <select  class="form-select" id="departmentID" asp-items="Model.DepartmentsList">
-                        <option disabled selected>--Select Department---</option>
-                    </select>
-                    @* <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span> *@
+                        <label asp-for="SelectedDepartmentId" class="control-label"></label>
+                        <select asp-for="SelectedDepartmentId" class="form-select" id="departmentID" asp-items="Model.ListofDepartments">
+                               <option disabled selected>Select Departments</option>
+                       </select>
+                    <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span>
+@*                     <label asp-for="SelectedDepartmentId" class="control-label"></label>
+                    <select id="lstCountryId" asp-for="SelectedDepartmentId" class="form-control" asp-items="Model.ListofDepartments"
+                            onchange="FillCities(this,'lstCity');"></select> *@
                 </div>
 
                 <div class="col-md-4 form-group mt-2">
@@ -55,13 +59,17 @@
                 <button type="submit" class="btn btn-primary float-end">Book Appointment</button>
                 <button type="button" class="btn btn-outline-secondary float-end me-2">Cancel</button>
             </div>
-                    <div asp-asp-validation-summary="ALL" class="text-danger"></div>
         </form>
 
     </div>
 </section>
 
 @section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
     <script>
         $(document).ready(function () {
             getDoctorsByDepartmentType();
@@ -102,53 +110,3 @@
     </script>
 }
 
-@* <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 border p-4 shadow bg-light">
-            <div class="col-12">
-                <h3 class="fw-normal text-secondary fs-4 text-uppercase mb-4">Appointment form</h3>
-            </div>
-            <form action="" method="post">
-                <input type="hidden" asp-for="PatientId" />
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label asp-for="patientFirstname">First Name</label>
-                        <input asp-for="patientFirstname" class="form-control" autocomplete="on" aria-required="true" placeholder="First Name" />
-                        <span asp-validation-for="patientFirstname" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <label asp-for="patientLastName">Last Name</label>
-                        <input asp-for="patientLastName" class="form-control" autocomplete="on" aria-required="true" placeholder="Last Name" />
-                        <span asp-validation-for="patientLastName" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6">
-                        <label asp-for="patientContactNumber">Phone number</label>
-                        <input asp-for="patientContactNumber" class="form-control" autocomplete="on" aria-required="true" placeholder="Phone Number" />
-                        <span asp-validation-for="patientContactNumber" class="text-danger"></span>
-                    </div>
-                  
-                    <div class="col-md-6">
-                        <label asp-for="AppointmentDate"></label>
-                        <div>
-                            <input asp-for="AppointmentDate" class="form-control" type="date" />
-                            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
-                        </div>
-                    </div>
-                   
-                    <div class="col-12">
-                        <label for="SelectedDoctorId" class="form-label">Select Doctor</label>
-                        @Html.DropDownListFor(model => model.DoctorId, new SelectList(Model.Doctors, "Id", "FirstName"), "Select Doctor", new { @class = "form-select" })
-                        <span asp-validation-for="DoctorId" class="text-danger"></span>
-                    </div>
-                    <div class="col-12">
-                        <textarea asp-for="AdditionalInfo" class="form-control" placeholder="Message"></textarea>
-                    </div>
-                    <div class="col-12 mt-5">
-                        <button type="submit" class="btn btn-primary float-end">Book Appointment</button>
-                        <button type="button" class="btn btn-outline-secondary float-end me-2">Cancel</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> *@
