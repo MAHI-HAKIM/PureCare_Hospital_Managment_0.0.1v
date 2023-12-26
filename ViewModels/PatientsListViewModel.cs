@@ -8,6 +8,10 @@ namespace PureCareHub_HospitalCare.ViewModels
 	public class PatientsListViewModel
 	{
 		public List<Patient> Patients { get; set; }
+		public int Doctorscount {  get; set; }
+		public int DepartmentsCount {  get; set; }
+		public int FullAppointmentCount {  get; set; }
+		public int patientCount {  get; set; }
 		public Dictionary<string, string>? PatientsEmails { get; set; } // Dictionary to store UserId -> Email mapping
 		public Dictionary<string, int> ?AppointmentCounts { get; set; } // Dictionary to store UserId -> Appointment Count mapping
 

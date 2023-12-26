@@ -16,6 +16,6 @@ namespace PureCareHub_HospitalCare.ViewModels
 		[Display(Name = "Department Description")]
 
 		public string DepartmentDescription { get; set; } = string.Empty;
-		public Doctor? HeadOfDeparment { get; set; }
-	}
+        public IFormFile? Photo { get; set; }
+    }
 }

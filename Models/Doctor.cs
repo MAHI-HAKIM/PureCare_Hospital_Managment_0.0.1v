@@ -39,5 +39,8 @@ namespace PureCareHub_HospitalCare.Models
         public Department ?department { get; set; }
         public Gender DoctorGender { get; set; }
 
+        // Navigation property to represent the relationship with doctor schedules
+        public ICollection<DoctorsSchedule> DoctorSchedules { get; set; } = new List<DoctorsSchedule>();
+
     }
 }

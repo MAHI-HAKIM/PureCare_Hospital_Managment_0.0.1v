@@ -10,19 +10,26 @@ namespace PureCareHub_HospitalCare.Controllers
 	{
 		private readonly ApplicationDBContext dbContext;
 		private readonly UserManager<ApplicationUser> _userManager;
+
+
 		public AdminController(ApplicationDBContext _dbContext,
 								UserManager<ApplicationUser> userManager)
 		{ 
 			dbContext = _dbContext;
 			_userManager = userManager;
 		}
-		public async Task<IActionResult> PatientList()
+
+        public async Task<IActionResult> DashBoard()
 		{
 			var patients = dbContext.patients.ToList(); // Make sure to use the correct property name
 
 			var viewModel = new PatientsListViewModel
 			{
 				Patients = patients,
+				Doctorscount = dbContext.doctors.Count(),
+				DepartmentsCount = dbContext.Departments.Count(),
+				FullAppointmentCount = dbContext.appointments.Count(),
+				patientCount = dbContext.patients.Count()
 			};
 
 			

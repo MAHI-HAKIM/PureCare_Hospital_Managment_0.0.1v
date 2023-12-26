@@ -11,5 +11,8 @@ namespace PureCareHub_HospitalCare.Models
         public string DepartmentName { get; set; } = string.Empty;
         [Display(Name = "Department Description")]
         public string DepartmentDescription { get; set; } = string.Empty;
+
+        public string PhotoPath { get; set; } = string.Empty;
+
     }
 }

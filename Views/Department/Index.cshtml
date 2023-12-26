@@ -15,7 +15,7 @@
 		</div>
 		<div class="col-10">
 			<div class="container-xl">
-				<div class="table-responsive">
+					<div class="table-responsive" style="max-height:680px; overflow-y: auto;">
 					<div class="table-wrapper">
 						<div class="table-title">
 							<div class="row">
@@ -33,10 +33,6 @@
 								<tr>
 									<th>Name</th>
 									<th>Description</th>
-									@if (Model.HeadOfDeparment != null)
-									{
-										<th>HeadofDepartment</th>
-									}
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -67,7 +63,7 @@
 				<div id="adddepartment" class="modal fade">
 				<div class="modal-dialog">
 					<div class="modal-content">
-						<form id="registerForm" method="post" asp-action="Create">
+							<form id="registerForm" method="post" asp-action="Create" enctype="multipart/form-data">
 							<div class="modal-header">
 								<h4 class="modal-title">Add Employee</h4>
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -78,20 +74,18 @@
 									<input asp-for="DepartmentName" class="form-control" autocomplete="on" aria-required="true"/>
 									<span asp-validation-for="DepartmentName" class="text-danger"></span>
 								</div>
+									<div class="form-group">
+										<label asp-for="DepartmentDescription">Department Description</label>
+										<input asp-for="DepartmentDescription" class="form-control" autocomplete="on" aria-required="true" />
+										<span asp-validation-for="DepartmentDescription" class="text-danger"></span>
+									</div>
 								<div class="form-group">
-									<label asp-for="DepartmentDescription">Department Description</label>
-									<input asp-for="DepartmentDescription" class="form-control" autocomplete="on" aria-required="true" />
-									<span asp-validation-for="DepartmentDescription" class="text-danger"></span>
+										<label asp-for="Photo">Photo</label>
+										<div class="mb-3">
+											<input asp-for="Photo" type="file" class="form-control" id="photo" name="photo" accept="image/*">
+										</div>
 								</div>
 								<div class="form-group">
-
-									@if (Model.DoctorList != null && Model.DoctorList.Any())
-									{
-										<label>Select Head of Department:</label>
-										<select asp-for="HeadOfDeparment" asp-items="Model.DoctorList"> 
-											<option value="">Select Doctor</option>
-										</select>
-									}
 								</div>
 							</div>
 							<div class="modal-footer">

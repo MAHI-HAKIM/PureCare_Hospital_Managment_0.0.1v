@@ -1,0 +1,144 @@
+﻿@model PureCareHub_HospitalCare.ViewModels.ServiceViewModel
+
+@{
+    var DepartmentPhotoPath = $"~/Images/{(!string.IsNullOrEmpty(Model.PhotoPath) ? Model.PhotoPath : "hosptialHERO_page.jpg")}";
+}
+<section id="service" class="d-flex align-items-center justify-content-center">
+    <div class="container-fluid hero-container text-center">
+        <h1 class="text-white">
+            <span class="mr-2" style="font-weight:bold;color:white;font-style:inherit">@Model.DepartmentName</span><br />
+        </h1>
+            <span style="font-size:15px;font-weight:bolder; color:lightyellow;font-style:italic">@Model.DepartmentDescription</span>
+      
+    </div>
+</section>
+
+
+
+<!-- ======= Doctors Section ======= -->
+<section id="doctors" class="doctors section-bg">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Doctors</h2>
+        </div>
+
+        <div class="row">
+            @foreach(var doctors in Model.doctorsList)
+            {
+                var photoPath = $"~/Images/{(!string.IsNullOrEmpty(doctors.PhotoPath) ? doctors.PhotoPath : "emanDoc.jpg")}";
+
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                <div class="member" data-aos="fade-up" data-aos-delay="100">
+                    <div class="member-img">
+                        <img src="@photoPath" class="img-fluid" alt="" asp-append-version="true">
+                        <div class="social">
+                                <a href="@Url.Action("Create", "Appointment", new { docid = doctors.Id })"><i class="fa fa-book"></i>Book an Appoinment</a>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>Dr @doctors.FirstName @doctors.LastName</h4>
+                        <span>@doctors.Email</span>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+    </div>
+</section><!-- End Doctors Section -->
+
+
+
+<style>
+
+#service {
+    width: 100%;
+    height: 100vh;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), url("../Images/gallery/DoctorsPage.jpg");
+    /* background: url("../Images/gallery/DoctorsPage.jpg") top center; */
+    background-size: cover;
+
+    margin-bottom: -200px;
+}
+
+    .doctors .member {
+        margin-bottom: 20px;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0px 2px 15px rgba(63, 187, 192, 0.1);
+    }
+
+        .doctors .member .member-img {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doctors .member .social {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            height: 50px;
+            opacity: 0;
+            transition: ease-in-out 0.3s;
+            background: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .doctors .member .social a {
+                transition: color 0.3s;
+                color: #555555;
+                margin: 0 10px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration:none;
+            }
+
+                .doctors .member .social a i {
+                    line-height: 0;
+                }
+
+                .doctors .member .social a:hover {
+                    color: #3fbbc0;
+                }
+
+            .doctors .member .social i {
+                font-size: 18px;
+                margin: 0 2px;
+            }
+
+        .doctors .member .member-info {
+            padding: 25px 15px;
+        }
+
+            .doctors .member .member-info h4 {
+                font-weight: 700;
+                margin-bottom: 5px;
+                font-size: 18px;
+                color: #555555;
+            }
+
+            .doctors .member .member-info span {
+                display: block;
+                font-size: 13px;
+                font-weight: 400;
+                color: #aaaaaa;
+            }
+
+            .doctors .member .member-info p {
+                font-style: italic;
+                font-size: 14px;
+                line-height: 26px;
+                color: #777777;
+            }
+
+        .doctors .member:hover .social {
+            opacity: 1;
+        }
+</style>

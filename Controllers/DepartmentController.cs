@@ -3,18 +3,23 @@ using PureCareHub_HospitalCare.Data;
 using PureCareHub_HospitalCare.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PureCareHub_HospitalCare.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace PureCareHub_HospitalCare.Controllers
 {
 	public class DepartmentController : Controller
 	{
 		private readonly ApplicationDBContext _dbContext;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-		public DepartmentController(ApplicationDBContext dbContext)
+        public DepartmentController(ApplicationDBContext dbContext,
+                                    IWebHostEnvironment webHostEnvironment)
 		{
 			_dbContext = dbContext;
-		}
-		public IActionResult Index()
+            _webHostEnvironment = webHostEnvironment;
+
+        }
+        public IActionResult Index()
 		{
 			var objDepartment = _dbContext.Departments.ToList();
 			var objDoctor = _dbContext.doctors.ToList();    
@@ -38,10 +43,13 @@ namespace PureCareHub_HospitalCare.Controllers
 		{
 			if(ModelState.IsValid)
 			{
+				string uniqueFileName = ProccessUploadedFile(model);
+
 				Department department = new Department
 				{
 					DepartmentName = model.DepartmentName,
 					DepartmentDescription = model.DepartmentDescription,
+					PhotoPath = uniqueFileName
 				};
 				_dbContext.Add(department);
 				_dbContext.SaveChanges();
@@ -50,8 +58,21 @@ namespace PureCareHub_HospitalCare.Controllers
 			}
 			return View();
 		}
+        private string ProccessUploadedFile(DepartmentViewModel model)
+        {
+            string uniqueFilename = "";
 
-		[HttpGet]
+            if (model.Photo != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                uniqueFilename = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFilename);
+                model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+            }
+
+            return uniqueFilename;
+        }
+        [HttpGet]
 		public IActionResult Edit(int ? depID) 
 		{
 			if (depID == null || depID == 0)
@@ -109,6 +130,5 @@ namespace PureCareHub_HospitalCare.Controllers
 
 			return RedirectToAction("Index");
 		}
-
 	}
 }

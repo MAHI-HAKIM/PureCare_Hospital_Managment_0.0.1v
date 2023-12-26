@@ -1,0 +1,41 @@
+﻿@model List<Department>
+
+<link href="~/css/service.css" rel="stylesheet" />
+
+<!-- Header-->
+<section id="hero-service" class="d-flex align-items-center justify-content-center">
+    <div class="container-fluid hero-container text-center">
+        <h1 class="text-white">
+            <span class="mr-2"style="font-weight:bold;color:lightblue;font-style:inherit">Our</span><span style="font-weight:bolder; color:lightcyan;font-style:italic">Services</span>
+        </h1>
+        <p class="text-white">Comprehensive healthcare services tailored to meet your needs. 
+            Our dedicated team is committed to providing compassionate and high-quality medical care.</p>
+    </div>
+</section>
+
+
+<div class="container" id="Services">
+    <div class="row">
+        @foreach (var department in Model)
+        {
+            var photoPath = $"~/Images/{(!string.IsNullOrEmpty(department.PhotoPath) ? department.PhotoPath : "general.jpg")}";
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                    <article class="card card--1" style="background-image: url('@Url.Content(photoPath)');">
+                        <div class="card__info-hover"></div>
+
+                        <div class="card__img"></div>
+
+                    <a href="@Url.Action("List", "Service", new { departmentId = department.Id })" class="card-link">
+                            <div class="card__img--hover"></div>
+                        </a>
+
+                        <div class="card__info">
+                            <p class="card__category">@department.DepartmentDescription</p>
+                            <h3 class="card__title">@department.DepartmentName</h3>
+                        </div>
+                    </article>
+            </div>
+        }
+    </div>
+</div>

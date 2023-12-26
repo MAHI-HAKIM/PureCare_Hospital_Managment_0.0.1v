@@ -1,1 +1,170 @@
-﻿
+﻿@model PureCareHub_HospitalCare.ViewModels.PatientsListViewModel
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 px-0">
+            <partial name="_AdminSidebarPartial" />
+        </div>
+
+          
+        <div class="col-10" ">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="custom-card doctor-card">
+                            <h3><b>Doctors</b></h3>
+                            <p>Total: 50</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="custom-card appointment-card">
+                            <h3 class="headersText"><b>Appointment</b></h3>
+                            <p>Total: 200</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="custom-card department-card">
+                            <h3><b>Departments</b></h3>
+                            <p>Total: 10</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h3 class="ml-4"><b>Patient List</b></h3>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        </div>
+                        <a class="btn btn-sm btn-success" asp-area="" asp-controller="Doctor" asp-action="Create">  <i class="fa fa-plus mr-2" aria-hidden="true"></i>Add Patients</a>
+                    </div>
+                </div>
+
+            
+
+                @foreach (var patient in Model.Patients)
+                {
+                    <div class="container" style="max-height: 800px; overflow-y: auto;">
+                        <div class="card mb-1">
+                            <div class="card-body">
+                                <div class="d-flex flex-column flex-lg-row">
+                                    <span class="avatar avatar-text rounded-3 me-4 bg-info mb-2">
+                                @((!string.IsNullOrEmpty(patient.FirstName) ? patient.FirstName[0].ToString() : "") + (!string.IsNullOrEmpty(patient.LastName) ? patient.LastName[0].ToString() : ""))
+                                    </span>
+                                    <div class="row flex-fill">
+                                        <div class="col-sm-5">
+                                            <h4 class="h5">@patient.FirstName  @patient.LastName</h4>
+                                            <span class="badge bg-warning">Appointment Count: @Model.AppointmentCounts[patient.UserId]</span>
+                                        </div>
+                                        <div class="col-sm-4 py-2">
+                                            <span class="badge bg-secondary">Patient Email :</span> <span class="badge bg-success">@((Model.PatientsEmails.TryGetValue(patient.UserId, out var email) && !string.IsNullOrEmpty(email)) ? email : "N/A") </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    body {
+        background: #eee;
+    }
+
+    .card {
+        box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+    }
+
+    .badge{
+        padding:5px 5px;
+        font-size: 15px;
+        color:lightcyan;
+    }
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid rgba(0,0,0,.125);
+        border-radius: 1rem;
+    }
+
+    .card-body {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 0.8rem 0.8rem;
+    }
+
+    .avatar-text {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        background: #000;
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .avatar {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .rounded-3 {
+        border-radius: 0.5rem !important;
+    }
+
+    .mb-2 {
+        margin-bottom: 0.5rem !important;
+    }
+
+    .me-4 {
+        margin-right: 1.5rem !important;
+    }
+
+    .custom-card {
+        border-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 5px;
+        margin-top:35px;
+        margin-bottom:5px;
+        text-align: center;
+       
+        color: #fff;
+    }
+
+    .doctor-card {
+        background: linear-gradient(45deg, #4e42ff, #070252);
+        color: #e0deff;
+    }
+
+    .appointment-card {
+        background: linear-gradient(45deg, #80f28c, #054d0d);
+        color: #e6ffe8;
+    }
+
+    .department-card {
+        background: linear-gradient(45deg, #99080a, #fcce83);
+        color: #ffe8ed;
+</style>

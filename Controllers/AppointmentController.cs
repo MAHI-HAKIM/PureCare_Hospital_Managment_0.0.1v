@@ -74,6 +74,65 @@ namespace PureCareHub_HospitalCare.Controllers
         }
 
         [HttpGet]
+        public IActionResult Create(int DocID)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the logged-in user's ID
+
+            // Retrieve the associated patient directly from the DbContext
+            var patient = _dbContext.patients.FirstOrDefault(p => p.UserId == userId);
+
+            // Check if the patient is found
+            if (patient == null)
+            {
+                // Handle the case where the patient is not found
+                // You might want to redirect to an error page or take some other action
+                return NotFound();
+            }
+
+            AppointmentRegistationViewModel viewModel = new AppointmentRegistationViewModel()
+            {
+                patientFirstname = patient.FirstName,
+                patientLastName = patient.LastName,
+                PatientId = patient.Id,
+                DoctorId = DocID,
+                assingedDoctor = _dbContext.doctors.Find(DocID),
+                AppointmentDate = DateTime.Now,
+
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Create(AppointmentRegistationViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                Appointment appointment = new Appointment() 
+                {
+                    patientFirstname = model.patientFirstname,
+                    patientLastName = model.patientLastName,
+                    AppointmentDate = model.AppointmentDate,
+                    PatientId = model.PatientId,
+                    patientContactNumber = model.patientContactNumber,
+                    DoctorId = model.DoctorId,
+                    AdditionalInfo = model.AdditionalInfo
+                };
+
+                _dbContext.Add(appointment);
+                _dbContext.SaveChanges();
+                ViewData["AppointmentDetails"] = appointment;
+                ViewData["PageTitle"] = "Appointment Detail";
+                TempData["Success"] = "You have successfully made an appointment";
+
+                // Redirect to "MedicalHistory/Index" for others (assuming they are patients)
+                return RedirectToAction("Index", "MedicalHistory");
+
+            }
+            return View(model);
+        }
+
+
+            [HttpGet]
         public IActionResult AdminAppointment()
         {
             var viewModel = new AppointmentRegistationViewModel

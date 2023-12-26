@@ -233,7 +233,6 @@ namespace PureCareHub_HospitalCare.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AdditionalInfo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("AppointmentDate")
@@ -242,7 +241,8 @@ namespace PureCareHub_HospitalCare.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientId")
+                    b.Property<int?>("PatientId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("patientContactNumber")
@@ -279,6 +279,10 @@ namespace PureCareHub_HospitalCare.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DepartmentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoPath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -329,6 +333,36 @@ namespace PureCareHub_HospitalCare.Migrations
                     b.HasIndex("depID");
 
                     b.ToTable("doctors");
+                });
+
+            modelBuilder.Entity("PureCareHub_HospitalCare.Models.DoctorsSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("DoctorSchedules");
                 });
 
             modelBuilder.Entity("PureCareHub_HospitalCare.Models.Patient", b =>
@@ -439,6 +473,17 @@ namespace PureCareHub_HospitalCare.Migrations
                     b.Navigation("department");
                 });
 
+            modelBuilder.Entity("PureCareHub_HospitalCare.Models.DoctorsSchedule", b =>
+                {
+                    b.HasOne("PureCareHub_HospitalCare.Models.Doctor", "Doctor")
+                        .WithMany("DoctorSchedules")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+                });
+
             modelBuilder.Entity("PureCareHub_HospitalCare.Models.Patient", b =>
                 {
                     b.HasOne("PureCareHub_HospitalCare.Areas.Identity.Data.ApplicationUser", "User")
@@ -458,6 +503,8 @@ namespace PureCareHub_HospitalCare.Migrations
             modelBuilder.Entity("PureCareHub_HospitalCare.Models.Doctor", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("DoctorSchedules");
                 });
 
             modelBuilder.Entity("PureCareHub_HospitalCare.Models.Patient", b =>

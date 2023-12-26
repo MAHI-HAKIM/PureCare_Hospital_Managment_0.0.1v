@@ -35,7 +35,7 @@ namespace PureCareHub_HospitalCare.ViewModels
         public int SelectedDepartmentId { get; set; }
         public SelectList? DepartmentsList { get; set; }
         public Gender DoctorGender { get; set; }
-        public IFormFile? Photo { get; set; } 
-
+        public IFormFile? Photo { get; set; }
+        public List<DoctorsSchedule> DoctorSchedules { get; set; } = new List<DoctorsSchedule>();
     }
 }

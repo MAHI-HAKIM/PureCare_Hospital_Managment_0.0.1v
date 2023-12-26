@@ -157,7 +157,6 @@ namespace PureCareHub_HospitalCare.Controllers
                 doctor.PhoneNumber = model.PhoneNumber;
                 doctor.Email = model.Email;
                 doctor.WorkingShift = model.WorkingShift;
-                //doctor.Department = model.Department;
                 doctor.DoctorGender = model.DoctorGender;
 
                 if(model.Photo != null)
