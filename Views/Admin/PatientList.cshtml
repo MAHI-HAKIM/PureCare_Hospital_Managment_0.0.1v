@@ -63,6 +63,27 @@
                                         <div class="col-sm-4 py-2">
                                             <span class="badge bg-secondary">Patient Email :</span> <span class="badge bg-success">@((Model.PatientsEmails.TryGetValue(patient.UserId, out var email) && !string.IsNullOrEmpty(email)) ? email : "N/A") </span>
                                         </div>
+        <div class="col-10">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h3>Patients List</h3>
+                </div>
+
+                @foreach (var patient in Model.Patients)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex flex-column flex-lg-row">
+                                <span class="avatar avatar-text rounded-3 me-4 bg-info mb-2">
+                                    @((!string.IsNullOrEmpty(patient.FirstName) ? patient.FirstName[0].ToString() : "") + (!string.IsNullOrEmpty(patient.LastName) ? patient.LastName[0].ToString() : ""))
+                                </span>
+                                <div class="row flex-fill">
+                                    <div class="col-sm-5">
+                                        <h4 class="h5">@patient.FirstName  @patient.LastName</h4>
+                                        <span class="badge bg-warning">Appointment Count: @Model.AppointmentCounts[patient.UserId]</span>
+                                    </div>
+                                    <div class="col-sm-4 py-2">
+                                        <span class="badge bg-secondary">Patient Email :</span> <span class="badge bg-success">@((Model.PatientsEmails.TryGetValue(patient.UserId, out var email) && !string.IsNullOrEmpty(email)) ? email : "N/A") </span>
                                     </div>
                                 </div>
                             </div>
@@ -109,6 +130,7 @@
         -ms-flex: 1 1 auto;
         flex: 1 1 auto;
         padding: 0.8rem 0.8rem;
+        padding: 1.5rem 1.5rem;
     }
 
     .avatar-text {
@@ -167,4 +189,5 @@
     .department-card {
         background: linear-gradient(45deg, #99080a, #fcce83);
         color: #ffe8ed;
+    }
 </style>
