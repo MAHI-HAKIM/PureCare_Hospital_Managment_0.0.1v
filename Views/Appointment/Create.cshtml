@@ -1,4 +1,4 @@
-﻿@model PureCareHub_HospitalCare.ViewModels.AppointmentRegistationViewModel
+@model PureCareHub_HospitalCare.ViewModels.AppointmentRegistationViewModel
 
 @{
     var photoPath = $"~/Images/{(!string.IsNullOrEmpty(Model.assingedDoctor.PhotoPath) ? Model.assingedDoctor.PhotoPath : "emanDoc.jpg")}";
@@ -192,5 +192,5 @@
     .text-truncate {
         font-weight: 500;
         font-size: 15px;
-    }
+    }
 </style>
