@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PureCareHub_HospitalCare.Data;
 using PureCareHub_HospitalCare.Models;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 
 namespace PureCareHub_HospitalCare.Controllers
 {
+	[Authorize]
     public class MedicalHistoryController : Controller
     {
         private readonly ApplicationDBContext _dbContext;
@@ -27,8 +29,13 @@ namespace PureCareHub_HospitalCare.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get the logged-in user's ID
             var patient = _dbContext.patients.FirstOrDefault(p => p.UserId == userId);
 
+			if (patient == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", userId);
+			}
 
-            var appointments = _dbContext.appointments
+			var appointments = _dbContext.appointments
                .Where(a => a.PatientId == patient.Id)
                .Include(a => a.AssociatedDoctor)
                 .Include(a => a.Patient)
@@ -52,7 +59,13 @@ namespace PureCareHub_HospitalCare.Controllers
 				return NotFound();
 			}
 			Appointment? appoinment = _dbContext.appointments.Find(appointmentID);
+			if (appoinment == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", appointmentID);
+			}
             var appointedDoc = _dbContext.doctors.Find(appoinment.DoctorId);
+
 			var departmentName = _docRepository.GetDepartmentName(appointedDoc.depID);
 
 			MedicalHistoryViewModel medicalHistoryDetail = new MedicalHistoryViewModel()

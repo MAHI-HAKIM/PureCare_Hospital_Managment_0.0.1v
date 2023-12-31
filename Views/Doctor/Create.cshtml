@@ -2,7 +2,8 @@
 
 @model PureCareHub_HospitalCare.ViewModels.DoctorRegistrationViewModel
 
-
+@{
+}
 <div class="container-fluid">
     <div class="row">
 
@@ -101,6 +102,69 @@
                                     <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span>
                                 </div>
                             </div>
+ 
+                            <div class="row mb-3" style="margin-top:-20px;">
+                                <div class="col-12">
+                                    <button class="ml-2 mb-2 btn btn-primary" type="button" onclick="showWorkingDays()"><i class="fa fa-calendar" aria-hidden="true" style="font-size:13px"></i> Select Work Days</button>
+                                    <div id="workingDaysContainer" style="display: none; display: flex; flex-wrap: wrap; justify-content: space-between;">
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Monday" id="monday" />
+                                                <label class="form-check-label" for="monday">Monday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Thursday" id="thursday" />
+                                                <label class="form-check-label" for="thursday">Thursday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Sunday" id="sunday" />
+                                                <label class="form-check-label" for="sunday">Sunday</label>
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="col-4">
+                                          
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Tuesday" id="tuesday" />
+                                                <label class="form-check-label" for="tuesday">Tuesday</label>
+                                            </div>
+                                          
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Friday" id="friday" />
+                                                <label class="form-check-label" for="friday">Friday</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Wednesday" id="wednesday" />
+                                                <label class="form-check-label" for="wednesday">Wednesday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Saturday" id="saturday" />
+                                                <label class="form-check-label" for="saturday">Saturday</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="WorkingDays" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label asp-for="StartTime">Start Time</label>
+                                    <div class="form mb-3">
+                                        <input asp-for="StartTime" class="form-control" type="time">
+                                        <span asp-validation-for="StartTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label asp-for="EndTime">End Time</label>
+                                    <div class="form mb-3">
+                                        <input asp-for="EndTime" class="form-control" type="time">
+                                        <span asp-validation-for="EndTime" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
                                 <div class="text-center">
                                     <div class="btn-group" style="width: 65%">
                                         <a href="@Url.Action("List", "Doctor")" class="btn btn-secondary mr-5" style="width: 120px">
@@ -123,3 +187,32 @@
 <style>
  
 </style>
+
+<script>
+
+    function showWorkingDays() {
+        var container = document.getElementById('workingDaysContainer');
+        container.style.display = container.style.display === 'none' ? 'flex' : 'none';
+    }    
+
+    $(document).ready(function () {
+
+        // Initialize jQuery UI Datepicker
+        $('#datePicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            onSelect: function (dateText) {
+                // Update the hidden input with the selected dates
+                $('#SelectedDates').val(dateText);
+            }
+        });
+
+        // Initialize Bootstrap Select
+        $('#daysOfWeek').selectpicker({
+            style: 'btn-light',
+            iconBase: 'fa',
+            tickIcon: 'fa-check'
+        });
+    });
+</script>
+
+

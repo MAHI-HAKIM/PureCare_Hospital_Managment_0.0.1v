@@ -37,7 +37,7 @@
                     <div><img src="@photoPath" alt="" class="avatar-mid rounded-circle img-thumbnail" asp-append-version="true" /></div>
                     @* <span class="badge badge-soft-success my-3">@Model.departmentName</span> *@
                     <div class="flex-1 ms-3">
-                        <h4 style="font-weight:bold"><a href="#" class="text-dark">Dr @Model.appointedDoctor.FirstName @Model.appointedDoctor.FirstName</a></h4>
+                        <h4 style="font-weight:bold"><a href="#" class="text-dark">Dr @Model.appointedDoctor.FirstName @Model.appointedDoctor.LastName</a></h4>
                         <span class="badge badge-soft-success mb-0">@Model.DepartmentName</span>
                     </div>
                     @* </div> *@
@@ -78,7 +78,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="small mb-1">Appointment Date</label>
-                                <input disabled class="form-control" id="inputUsername" type="text" placeholder="" value="@Model.appointments.AppointmentDate">
+                                <input disabled class="form-control" id="inputUsername" type="text" placeholder=""
+                                       value="@Model.appointments.AppointmentDate.ToString("yyyy-MM-dd") @Model.appointments.StartTime.ToString("hh:mm tt")">
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputLocation">Additional Info</label>

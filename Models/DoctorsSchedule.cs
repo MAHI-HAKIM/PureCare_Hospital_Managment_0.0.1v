@@ -13,20 +13,19 @@ namespace PureCareHub_HospitalCare.Models
         [Required(ErrorMessage = "Please enter the start time.")]
         [Display(Name = "Start Time")]
         [DataType(DataType.Time)]
-        public TimeSpan StartTime { get; set; }
+        public DateTime StartTime { get; set; }
 
         [Required(ErrorMessage = "Please enter the end time.")]
         [Display(Name = "End Time")]
         [DataType(DataType.Time)]
-        public TimeSpan EndTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         // Foreign key to associate with the Doctor entity
         public int DoctorId { get; set; }
 
         // Navigation property to represent the relationship with doctors
-        public Doctor? Doctor { get; set; }
+        public Doctor? doctor { get; set; }
         public bool IsAvailable { get; set; } // New property for availability
-
 
 
     }

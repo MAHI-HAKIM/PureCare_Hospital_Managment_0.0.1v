@@ -27,7 +27,7 @@ namespace PureCareHub_HospitalCare.Models
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; } = string.Empty;
-        public string PhotoPath { get; set; } = string.Empty;
+        public string ?PhotoPath { get; set; } 
 
         [Required(ErrorMessage = "Please select working shift.")]
         [Display(Name = "Working Shift")]

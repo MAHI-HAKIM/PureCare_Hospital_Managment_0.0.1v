@@ -5,14 +5,16 @@
 
     </div>
     <div class="container-fluid hero-container" style="margin-left:150px">
-        <h1>
+            <h1 style="color:#d9feff">
             Welcome to <span style="font-weight:bold;color:deepskyblue;font-style:inherit">Pure</span><span style="font-weight:bolder; color:lawngreen;font-style:italic">Care</span>
         </h1>
-        <h2><span style="font-weight:bold"> Your Trusted Partner in Healthcare </span></h2>
+            <h2>
+                <span style="font-weight:bold; color:#f5fff6"> Your Trusted Partner in Healthcare </span>
+            </h2>
             @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
             {
                 <!-- User is logged in as a patient, show "Take an Appointment" -->
-                <a href="/Appointment/Index" class="btn-get-started " style="text-decoration: none;">Take an Appointment</a>
+                <a asp-area="" asp-controller="Service" asp-action="Index" class="btn-get-started " style="text-decoration: none;">Take an Appointment</a>
             }
             else
             {

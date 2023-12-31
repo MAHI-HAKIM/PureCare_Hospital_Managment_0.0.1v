@@ -18,7 +18,7 @@
     <div class="row">
         @foreach (var department in Model)
         {
-            var photoPath = $"~/Images/{(!string.IsNullOrEmpty(department.PhotoPath) ? department.PhotoPath : "general.jpg")}";
+            var photoPath = $"~/Images/{(!string.IsNullOrEmpty(department.PhotoPath) ? department.PhotoPath:"general.png")}";
 
             <div class="col-lg-4 col-md-6 col-sm-12">
                     <article class="card card--1" style="background-image: url('@Url.Content(photoPath)');">

@@ -4,9 +4,11 @@ using PureCareHub_HospitalCare.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PureCareHub_HospitalCare.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PureCareHub_HospitalCare.Controllers
 {
+	[Authorize]
 	public class DepartmentController : Controller
 	{
 		private readonly ApplicationDBContext _dbContext;
@@ -19,10 +21,17 @@ namespace PureCareHub_HospitalCare.Controllers
             _webHostEnvironment = webHostEnvironment;
 
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
 		{
 			var objDepartment = _dbContext.Departments.ToList();
-			var objDoctor = _dbContext.doctors.ToList();    
+			var objDoctor = _dbContext.doctors.ToList();
+
+			if (objDepartment == null || objDoctor == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", 404);
+			}
 
 			DepartmentViewModel viewModel = new DepartmentViewModel { 
 				DepartmentList = objDepartment,
@@ -39,7 +48,8 @@ namespace PureCareHub_HospitalCare.Controllers
 		}
 		
 		[HttpPost]
-		public IActionResult Create(DepartmentViewModel model)
+        [Authorize(Roles = "Admin")]
+        public IActionResult Create(DepartmentViewModel model)
 		{
 			if(ModelState.IsValid)
 			{
@@ -73,7 +83,8 @@ namespace PureCareHub_HospitalCare.Controllers
             return uniqueFilename;
         }
         [HttpGet]
-		public IActionResult Edit(int ? depID) 
+        [Authorize(Roles = "Admin")]
+        public IActionResult Edit(int ? depID) 
 		{
 			if (depID == null || depID == 0)
 			{
@@ -82,13 +93,19 @@ namespace PureCareHub_HospitalCare.Controllers
 			Department? department = _dbContext.Departments.Find(depID);
 			if (department == null)
 			{
+				Response.StatusCode = 404;
+				return View("404ID", 404);
+			}
+			if (department == null)
+			{
 				return NotFound();
 			}
 			return View(department);
 		}
 
 		[HttpPost]
-		public IActionResult Edit(DepartmentViewModel model)
+        [Authorize(Roles = "Admin")]
+        public IActionResult Edit(DepartmentViewModel model)
 		{
 			if (ModelState.IsValid)
 			{
@@ -114,15 +131,17 @@ namespace PureCareHub_HospitalCare.Controllers
 			return View(model); // If ModelState is not valid, return to the edit view with validation errors
 		}
 
-		public IActionResult Delete(int? ID)
+		[HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult Delete(int? ID)
 		{
 			Department doctorFromDb = _dbContext.Departments.Find(ID);
 
 			if (doctorFromDb == null)
 			{
-				return NotFound();
+				Response.StatusCode = 404;
+				return View("404ID", 404);
 			}
-
 			_dbContext.Remove(doctorFromDb);
 			_dbContext.SaveChanges();
 

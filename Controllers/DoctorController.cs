@@ -7,9 +7,12 @@ using PureCareHub_HospitalCare.Models.Service;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PureCareHub_HospitalCare.Controllers
 {
+    [Authorize]
     public class DoctorController : Controller
     {
         //private readonly IDocRepository _docRepository;
@@ -28,13 +31,19 @@ namespace PureCareHub_HospitalCare.Controllers
             _webHostEnvironment = webHostEnvironment;
             _docRepository = docRepository;
         }
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             var objDocotr = _dbContext.doctors.ToList();
             var doctorViewModels = new List<DoctorViewModel>();
-           
 
-            foreach (var doctor in objDocotr)
+			if (objDocotr == null || doctorViewModels == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", 404);
+			}
+			foreach (var doctor in objDocotr)
             {
                 var departmentName = _docRepository.GetDepartmentName(doctor.depID);
                 doctorViewModels.Add(new DoctorViewModel { doctor = doctor, DepartmentName = departmentName });
@@ -48,8 +57,13 @@ namespace PureCareHub_HospitalCare.Controllers
             var objDocotr = _dbContext.doctors.ToList();
             var doctorViewModels = new List<DoctorViewModel>();
 
+			if (objDocotr == null || doctorViewModels == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", 404);
+			}
 
-            foreach (var doctor in objDocotr)
+			foreach (var doctor in objDocotr)
             {
                 var departmentName = _docRepository.GetDepartmentName(doctor.depID);
                 doctorViewModels.Add(new DoctorViewModel { doctor = doctor, DepartmentName = departmentName });
@@ -59,24 +73,39 @@ namespace PureCareHub_HospitalCare.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public ViewResult Create()
         {
             var viewModel = new DoctorRegistrationViewModel {
-                DepartmentsList = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName")
+                DepartmentsList = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName"),
             };
 
-            ViewData["DepartmentID"] = new SelectList(_dbContext.Departments, "Id", "DepartmentName");
+			if (viewModel == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", 404);
+			}
 
             return View(viewModel);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create(DoctorRegistrationViewModel model)
         {
-            if(ModelState.IsValid)
+
+            if (model.WorkingDays == null || !model.WorkingDays.Any())
+            {
+                model.DepartmentsList = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
+                ModelState.AddModelError(nameof(DoctorEditViewModel.WorkingDays), "Please select at least one day.");
+                return View(model);
+            }
+
+            if (ModelState.IsValid)
             {
                 string uniqueFilename = ProccessUploadedFile(model);
 
-                Doctor doctor = new Doctor
+
+				Doctor doctor = new Doctor
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
@@ -88,15 +117,55 @@ namespace PureCareHub_HospitalCare.Controllers
                     PhotoPath = uniqueFilename
                 };
 
+                // Save the doctor information
                 _dbContext.Add(doctor);
                 _dbContext.SaveChanges();
+
+                // Retrieve the newly created doctor ID
+                int doctorId = doctor.Id;
+
+                // Save the doctor's schedule
+                ICollection<DayOfWeek> selectedDays = model.WorkingDays ?? new List<DayOfWeek>();
+
+                foreach (var dayOfWeek in selectedDays)
+                {
+                    DoctorsSchedule schedule = new DoctorsSchedule
+                    {
+                        DoctorId = doctorId,
+                        DayOfWeek = dayOfWeek,
+                        StartTime = model.StartTime, // You need to modify this based on your ViewModel
+                        EndTime = model.EndTime, // You need to modify this based on your ViewModel
+                        IsAvailable = true,
+                    };
+
+                    _dbContext.Add(schedule);
+                }
+
+			
+
+				_dbContext.SaveChanges();
+
                 TempData["Success"] = "Successfully created a Doctor";
                 return RedirectToAction("List");
             }
+
             return View();
         }
-
         private string ProccessUploadedFile(DoctorRegistrationViewModel model)
+        {
+            string uniqueFilename = "";
+
+            if (model.Photo != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                uniqueFilename = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFilename);
+                model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+            }
+
+            return uniqueFilename;
+        }
+        private string ProccessUploadedFile(DoctorEditViewModel model)
         {
             string uniqueFilename = "";
 
@@ -112,6 +181,7 @@ namespace PureCareHub_HospitalCare.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int? docid)
         {
             if (docid == null || docid == 0)
@@ -119,22 +189,51 @@ namespace PureCareHub_HospitalCare.Controllers
                 return NotFound();
             }
 
-            Doctor? doctordb = _dbContext.doctors.Find(docid);
+			Doctor? doctordb = _dbContext.doctors.Find(docid);
 
-            //category? categoryfromdb1 = _dbcontext.categories.firstordefault(u=>u.categoryid == id);
-            ////category? categoryfromdb2 = _dbcontext.categories.where(u=>u.categoryid==id).firstordefault();
+			if (doctordb == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", 404);
+			}
 
-            if (doctordb == null)
+			ICollection<DoctorsSchedule>? doctorSchedulesList = _dbContext.DoctorSchedules
+            .Where(schedule => schedule.DoctorId == docid)
+            .ToList();
+
+            // Find any schedule of that doctor
+            DoctorsSchedule firstSchedule = _dbContext.DoctorSchedules.Where(schedule => schedule.DoctorId == docid).FirstOrDefault();
+
+            DoctorEditViewModel viewModel = new DoctorEditViewModel()
             {
-                return NotFound();
-            }
-           
-            return View(doctordb);
+                doctor = doctordb,
+                ExistingPhotoPath = doctordb.PhotoPath,
+                schedules = doctorSchedulesList,
+                SelectedDepartmentId = doctordb.depID,
+                DepartmentsList = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName"),
+                doctorsSchedule = firstSchedule
+            };
+            return View(viewModel);
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(DoctorEditViewModel model)
         {
+
+            if (model.WorkingDays == null || !model.WorkingDays.Any())
+            {
+                ICollection<DoctorsSchedule>? doctorSchedulesList = _dbContext.DoctorSchedules
+              .Where(schedule => schedule.DoctorId == model.doctor.Id)
+                .ToList();
+
+                model.schedules = doctorSchedulesList;
+                model.DepartmentsList = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
+                ModelState.AddModelError(nameof(DoctorEditViewModel.WorkingDays), "Please select at least one day.");
+                return View(model);
+            }
+
+
             foreach (var modelState in ModelState.Values)
             {
                 foreach (var error in modelState.Errors)
@@ -142,53 +241,88 @@ namespace PureCareHub_HospitalCare.Controllers
                     Console.WriteLine(error.ErrorMessage);
                 }
             }
+
             if (ModelState.IsValid)
             {
-
-                Doctor ?doctor = _dbContext.doctors.Find(model.Id);
+                
+                Doctor doctor = _dbContext.doctors.Include(d => d.DoctorSchedules).FirstOrDefault(d => d.Id == model.doctor.Id);
 
                 if (doctor == null)
                 {
                     return NotFound();
                 }
 
-                doctor.FirstName = model.FirstName;
-                doctor.LastName = model.LastName;
-                doctor.PhoneNumber = model.PhoneNumber;
-                doctor.Email = model.Email;
-                doctor.WorkingShift = model.WorkingShift;
-                doctor.DoctorGender = model.DoctorGender;
+                // Update doctor information
+                doctor.FirstName = model.doctor.FirstName;
+                doctor.LastName = model.doctor.LastName;
+                doctor.PhoneNumber = model.doctor.PhoneNumber;
+                doctor.Email = model.doctor.Email;
+                doctor.depID = model.SelectedDepartmentId;
+                doctor.WorkingShift = model.doctor.WorkingShift;
+                doctor.DoctorGender = model.doctor.DoctorGender;
 
-                if(model.Photo != null)
+                if (model.Photo != null)
                 {
                     if (doctor.PhotoPath != null)
                     {
-                        string filePath = Path.Combine(_webHostEnvironment.WebRootPath,
-                                            "images", doctor.PhotoPath);
-                        try
+                        if(model.ExistingPhotoPath != null)
                         {
-                            System.IO.File.Delete(filePath);
+                            string filepath = Path.Combine(_webHostEnvironment.WebRootPath, "images", model.ExistingPhotoPath);
+                            System.IO.File.Delete(filepath);
                         }
-                        catch (Exception ex)
-                        {
-                            // Log or handle the exception appropriately
-                            Console.WriteLine($"Error deleting file: {ex.Message}");
-                        }
+                        doctor.PhotoPath = ProccessUploadedFile(model);
                     }
-                    doctor.PhotoPath = ProccessUploadedFile(model);
                 }
-               
+
+                ICollection<DayOfWeek> selectedDays = model.WorkingDays ?? new List<DayOfWeek>();
+
+				if (model.WorkingDays == null || !model.WorkingDays.Any())
+				{
+					ICollection<DoctorsSchedule>? doctorSchedulesList = _dbContext.DoctorSchedules
+				  .Where(schedule => schedule.DoctorId == model.doctor.Id)
+					.ToList();
+
+					model.schedules = doctorSchedulesList;
+					model.DepartmentsList = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
+					ModelState.AddModelError(nameof(DoctorEditViewModel.WorkingDays), "Please select at least one day.");
+					return View(model);
+				}
+
+				var schedulesToRemove = doctor.DoctorSchedules.Where(d => d.DoctorId == model.doctor.Id).ToList();
+
+                // Remove existing schedules
+                foreach (var schedule in schedulesToRemove)
+                {
+                    _dbContext.Remove(schedule);
+                }
+
+				// Add new schedules
+				foreach (var dayOfWeek in selectedDays)
+                {
+                        DoctorsSchedule newSchedule = new DoctorsSchedule
+                        {
+                            DoctorId = model.doctor.Id,
+                            DayOfWeek = dayOfWeek,
+                            StartTime = model.doctorsSchedule.StartTime,
+                            EndTime = model.doctorsSchedule.EndTime,
+                            IsAvailable = true,
+                        };
+
+                        _dbContext.Add(newSchedule);
+                }
                 _dbContext.Update(doctor);
                 _dbContext.SaveChanges();
                 TempData["Success"] = "Successfully Updated a Doctor";
                 return RedirectToAction("List");
             }
-            return View();
-        }
-     
 
+            model.DepartmentsList = new SelectList(_dbContext.Departments.ToList(), "Id", "DepartmentName");
+
+            return View(model);
+        }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? docid)
         {
             if (docid == null || docid == 0)
@@ -198,27 +332,28 @@ namespace PureCareHub_HospitalCare.Controllers
 
             Doctor doctordb = _dbContext.doctors.Find(docid);
 
-            //category? categoryfromdb1 = _dbcontext.categories.firstordefault(u=>u.categoryid == id);
-            ////category? categoryfromdb2 = _dbcontext.categories.where(u=>u.categoryid==id).firstordefault();
+			if (doctordb == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", docid);
+			}
 
-            if (doctordb == null)
-            {
-                return NotFound();
-            }
-
-            return View(doctordb);
+			return View(doctordb);
         }
         [HttpPost,ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeletePost(int? ID)
         {
             Doctor doctorFromDb = _dbContext.doctors.Find(ID);
 
-            if(doctorFromDb == null)
-            {
-                return NotFound();
-            }
 
-            _dbContext.Remove(doctorFromDb);
+			if (doctorFromDb == null)
+			{
+				Response.StatusCode = 404;
+				return View("404ID", ID);
+			}
+
+			_dbContext.Remove(doctorFromDb);
             _dbContext.SaveChanges();
 
             TempData["Success"] = "Successfully Deleted a Doctor";

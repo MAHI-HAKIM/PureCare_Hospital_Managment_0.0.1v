@@ -1,13 +1,11 @@
-﻿@model Doctor
+﻿@model PureCareHub_HospitalCare.ViewModels.DoctorEditViewModel
 
 @{
-    ViewBag.Title = "Edit Docto";
-
     var photoPath = "~/Images/emanDoc.jpg";
 
-    if (Model != null && !string.IsNullOrEmpty(Model.PhotoPath))
+    if (Model != null && !string.IsNullOrEmpty(Model.ExistingPhotoPath))
     {
-        photoPath = $"~/Images/{Model.PhotoPath}";
+        photoPath = $"~/Images/{Model.ExistingPhotoPath}";
     }
 
 }
@@ -29,7 +27,10 @@
                 <div class="card card-4">
                     <div class="card-body ">
                         <form enctype="multipart/form-data" id="editForm" method="post" asp-action="Edit">
-                            <input hidden asp-for="Id" />
+                            <input hidden asp-for="doctor.Id" />
+                            <input hidden asp-for="ExistingPhotoPath" />
+
+                            @* <div asp-validation-summary="All" class="text-danger"></div> *@
 
                             <div class="row">
                                 <div class="col-2 mb-3">
@@ -46,16 +47,16 @@
                                 <div class="col-5 mt-2">
 
                                     <div class="form-floating mb-4">
-                                        <input asp-for="FirstName" class="form-control" autocomplete="on" aria-required="true" placeholder="First Name" />
-                                        <label asp-for="FirstName">First Name</label>
-                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        <input asp-for="doctor.FirstName" class="form-control" autocomplete="on" aria-required="true" placeholder="First Name" />
+                                        <label asp-for="doctor.FirstName">First Name</label>
+                                        <span asp-validation-for="doctor.FirstName" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-5 mt-2">
                                     <div class="form-floating mb-4 ">
-                                        <input asp-for="LastName" class="form-control" autocomplete="on" aria-required="true" placeholder="Last Name" />
-                                        <label asp-for="LastName">Last Name</label>
-                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                        <input asp-for="doctor.LastName" class="form-control" autocomplete="on" aria-required="true" placeholder="Last Name" />
+                                        <label asp-for="doctor.LastName">Last Name</label>
+                                        <span asp-validation-for="doctor.LastName" class="text-danger"></span>
 
                                     </div>
                                 </div>
@@ -66,37 +67,37 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-floating mb-4">
-                                        <input asp-for="Email" class="form-control" autocomplete="on" aria-required="true" placeholder="name@example.com" />
-                                        <label asp-for="Email">Email</label>
-                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                        <input asp-for="doctor.Email" class="form-control" autocomplete="on" aria-required="true" placeholder="name@example.com" />
+                                        <label asp-for="doctor.Email">Email</label>
+                                        <span asp-validation-for="doctor.Email" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-floating mb-3">
-                                        <input asp-for="PhoneNumber" class="form-control" autocomplete="on" aria-required="true" placeholder="" />
-                                        <label asp-for="PhoneNumber">Phone number</label>
-                                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        <input asp-for="doctor.PhoneNumber" class="form-control" autocomplete="on" aria-required="true" placeholder="" />
+                                        <label asp-for="doctor.PhoneNumber">Phone number</label>
+                                        <span asp-validation-for="doctor.PhoneNumber" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <label asp-for="PhotoPath ">Photo</label>
+                                    <label asp-for="doctor.PhotoPath ">Photo</label>
                                     <div class="mb-3">
-                                        <input asp-for="PhotoPath" type="file" class="form-control .custom-file-input .custom-file-label" placeholde="Choose photo" id="photo" name="photo" accept="image/*">
+                                        <input asp-for="doctor.PhotoPath" type="file" class="form-control .custom-file-input .custom-file-label" placeholde="Choose photo" id="photo" name="photo" accept="image/*">
                                     </div>
                                 </div>
 
                                 <div class="col-6">
-                                    <label asp-for="WorkingShift">Working Shift</label>
+                                    <label asp-for="doctor.WorkingShift">Working Shift</label>
                                     <div class="form mb-3">
-                                        <select asp-for="WorkingShift" class="form-control">
+                                        <select asp-for="doctor.WorkingShift" class="form-control">
                                             @foreach (var shift in Enum.GetNames(typeof(ShiftType)))
                                             {
                                                 <option value="@shift">@shift</option>
                                             }
                                         </select>
-                                        <span asp-validation-for="WorkingShift" class="text-danger"></span>
+                                        <span asp-validation-for="doctor.WorkingShift" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -105,30 +106,87 @@
 
                             <div class="row">
                                 <div class="col-6">
-                                    <label asp-for="DoctorGender">Gender</label>
+                                    <label asp-for="doctor.DoctorGender">Gender</label>
                                     <div class="form mb-3">
-                                        <select asp-for="DoctorGender" class="form-control">
+                                        <select asp-for="doctor.DoctorGender" class="form-control">
                                             @foreach (var gender in Enum.GetNames(typeof(Gender)))
                                             {
                                                 <option value="@gender">@gender</option>
                                             }
                                         </select>
-                                        <span asp-validation-for="WorkingShift" class="text-danger"></span>
+                                        <span asp-validation-for="doctor.WorkingShift" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    @* <label asp-for="Department">Department</label>
                                     <div class="form mb-5">
-                                        <select asp-for="Department" class="form-control">
-                                            @foreach (var department in Enum.GetNames(typeof(DepartmentType)))
-                                            {
-                                                <option value="@department">@department</option>
-                                            }
-                                        </select>
-                                        <span asp-validation-for="WorkingShift" class="text-danger"></span>
-                                    </div> *@
+                                        <label asp-for="SelectedDepartmentId" class="control-label"></label>
+                                        <select asp-for="SelectedDepartmentId" class="form-control" asp-items="Model.DepartmentsList"></select>
+                                    </div>
+                                    <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span>
                                 </div>
                             </div>
+
+                            <div class="row mb-3" style="margin-top:-20px;">
+                                <div class="col-12">
+                                    <button class="ml-2 mb-2 btn btn-primary" type="button" onclick="showWorkingDays()"><i class="fa fa-calendar" aria-hidden="true" style="font-size:13px"></i> Select Work Days</button>
+                                    <div id="workingDaysContainer" style="display: none; display: flex; flex-wrap: wrap; justify-content: space-between;">
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Monday" id="monday" @(Model.schedules != null && Model.schedules.Any(s => s.DayOfWeek == DayOfWeek.Monday) ? "checked" : "") data-val="true" data-val-required="Please select at least one day." />
+                                                <label class="form-check-label" for="monday">Monday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Thursday" id="thursday" @(Model.schedules != null && Model.schedules.Any(s => s.DayOfWeek == DayOfWeek.Thursday) ? "checked" : "") />
+                                                <label class="form-check-label" for="thursday">Thursday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Sunday" id="sunday" @(Model.schedules != null && Model.schedules.Any(s => s.DayOfWeek == DayOfWeek.Sunday) ? "checked" : "") />
+                                                <label class="form-check-label" for="sunday">Sunday</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Tuesday" id="tuesday" @(Model.schedules.Any(s => s.DayOfWeek == DayOfWeek.Tuesday) ? "checked" : "") data-val="true" data-val-required="Please select at least one day." />
+                                                <label class="form-check-label" for="tuesday">Tuesday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Friday" id="friday" @(Model.schedules.Any(s => s.DayOfWeek == DayOfWeek.Friday) ? "checked" : "") />
+                                                <label class="form-check-label" for="friday">Friday</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Wednesday" id="wednesday" @(Model.schedules.Any(s => s.DayOfWeek == DayOfWeek.Wednesday) ? "checked" : "") data-val="true" data-val-required="Please select at least one day." />
+                                                <label class="form-check-label" for="wednesday">Wednesday</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" name="WorkingDays" value="Saturday" id="saturday" @(Model.schedules.Any(s => s.DayOfWeek == DayOfWeek.Saturday) ? "checked" : "") />
+                                                <label class="form-check-label" for="saturday">Saturday</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="WorkingDays" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label asp-for="doctorsSchedule.StartTime">Start Time</label>
+                                        <div class="form mb-3">
+                                        <input asp-for="doctorsSchedule.StartTime" class="form-control" type="time">
+                                        <span asp-validation-for="doctorsSchedule.StartTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                    <label asp-for="doctorsSchedule.EndTime">End Time</label>
+                                        <div class="form mb-3">
+                                        <input asp-for="doctorsSchedule.EndTime" class="form-control" type="time">
+                                        <span asp-validation-for="doctorsSchedule.EndTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        
                             <div class="text-center">
 
                                 <div class="text-center">
@@ -140,7 +198,7 @@
                                             Edit
                                         </button>
                                     </div>
-                                    <input type="hidden" asp-for="Id" />
+                                    <input type="hidden" asp-for="doctor.Id" />
                                 </div>
 
 
@@ -157,3 +215,17 @@
 <style>
 
 </style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+
+    function showWorkingDays() {
+        var container = document.getElementById('workingDaysContainer');
+        container.style.display = container.style.display === 'none' ? 'flex' : 'none';
+    }
+
+</script>

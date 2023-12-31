@@ -1,5 +1,13 @@
 ﻿@model PureCareHub_HospitalCare.ViewModels.PatientsListViewModel
 
+
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<partial name="_Notification">
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-2 px-0">
@@ -13,81 +21,121 @@
                 <div class="row">
                     <div class="col-4">
                         <a href="@Url.Action("List", "Doctor")" class="text-decoration-none">
-                            <div class="custom-card doctor-card">
-                                <h5><b>Doctors</b></h5>
-                                <p>Total: @Model.Doctorscount</p>
+                            <div class="custom-card doctor-card d-flex flex-column align-items-center">
+                                <div class="mt-3">
+                                    <h5 class="mb-2"><b>Doctors</b></h5>
+                                    <p class="mb-2">Total: @Model.Doctorscount</p>
+                                </div>
+                                <i class="icon-doctor material-icons" style="font-size: 35px">person</i>
                             </div>
                         </a>
                     </div>
                     <div class="col-4">
                         <a href="@Url.Action("List", "Appointment")" class="text-decoration-none">
-                            <div class="custom-card appointment-card">
-                                <h5 class="headersText"><b>Appointment</b></h5>
-                                <p>Total: @Model.FullAppointmentCount</p>
+                            <div class="custom-card appointment-card d-flex flex-column align-items-center">
+                                <div class="mt-3">
+                                    <h5 class="mb-2"><b>Appointment</b></h5>
+                                    <p class="mb-2">Total: @Model.FullAppointmentCount</p>
+                                </div>
+                                <i class="icon-appointment material-icons" style="font-size: 35px">event</i>
                             </div>
                         </a>
                     </div>
                     <div class="col-4">
                         <a href="@Url.Action("Index", "Department")" class="text-decoration-none">
-                            <div class="custom-card department-card">
-                                <h5><b>Departments</b></h5>
-                                <p>Total: @Model.DepartmentsCount</p>
+                            <div class="custom-card department-card d-flex flex-column align-items-center">
+                                <div class="mt-3">
+                                    <h5 class="mb-2"><b>Departments</b></h5>
+                                    <p class="mb-2">Total: @Model.DepartmentsCount</p>
+                                </div>
+                                <i class="icon-department material-icons" style="font-size: 35px">business</i>
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
 
-
-            <div class="container">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h3 class="ml-4"><b>Patient List</b></h3>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <a class="btn btn-sm btn-success"> </i>@Model.patientCount Users</a>
+            <div class="col-md-12 mt-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Users List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                            <table class="table">
+                                <thead class="text-success">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var patient in Model.Patients)
+                                    {
+                                        <tr>
+                                            <td>@patient.FirstName</td>
+                                            <td>@patient.LastName</td>
+                                            <td>@((Model.PatientsEmails.TryGetValue(patient.UserId, out var email) && !string.IsNullOrEmpty(email)) ? email : "N/A")</td>
+                                            <td>
+                                                <a href="" class="edit"><i class="fa fa-pencil" aria-hidden="true" style="font-size:20px;color:lightblue"></i> </a>
+                                                <a href="#" class="delete" data-toggle="modal" data-target="#deleteEmployeeModal" data-delete-url="@Url.Action("DeleteUser", "Admin", new { userId = patient.UserId})">
+                                                    <i class="fa fa-trash" aria-hidden="true" style="font-size:20px; color:red"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                   }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
-
-
-        @foreach (var patient in Model.Patients)
-        {
-                    <div class="container" style="max-height: 500px; overflow-y: auto;">
-                        <div class="card mb-1">
-                            <div class="card-body">
-                                <div class="d-flex flex--row">
-                                    <span class="avatar avatar-text rounded-3 me-4 bg-info mb-2">
-                                @((!string.IsNullOrEmpty(patient.FirstName) ? patient.FirstName[0].ToString() : "") + (!string.IsNullOrEmpty(patient.LastName) ? patient.LastName[0].ToString() : ""))
-                                    </span>
-                                    <div class="row flex-fill">
-                                        <div class="col-5">
-                                            <h4 class="h5 mb-0">@patient.FirstName  @patient.LastName</h4>
-                                            <span class="badge bg-warning">Appointment Count: @Model.AppointmentCounts[patient.UserId]</span>
-                                        </div>
-                                        <div class="col-sm-4 py-2">
-                                           <span class="badge bg-success">@((Model.PatientsEmails.TryGetValue(patient.UserId, out var email) && !string.IsNullOrEmpty(email)) ? email : "N/A") </span>
-                                        </div>
-                                        <div class="col-1 mt-3 ml-4">
-                                            <a class="edit"><i class="fa fa-eye edit" aria-hidden="true" style="font-size:20px"></i> </a>
-                                         </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                       
-                    </div>
-
-                   
-        }
             </div>
+
+            <!-- Delete Modal HTML -->
+            <div id="deleteEmployeeModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="deleteUserForm" method="post">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Delete Employee</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete these Records?</p>
+                                <p class="text-warning"><small>This action cannot be undone.</small></p>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                                <input type="submit" class="btn btn-danger" value="Delete">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
 
 
-
 <style>
+
+        /* Custom CSS for styling */
+    tbody tr:nth-child(odd) {
+        background-color: #f9f9f9; /* Light color for odd rows */
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #ffffff; /* White color for even rows */
+    }
+
+    .table-responsive {
+        overflow-x: auto; /* Enable horizontal scrolling on small screens */
+    }
+
     body {
         background: #eee;
     }
@@ -168,18 +216,18 @@
     }
 
     .doctor-card {
-        background: linear-gradient(45deg, #4e42ff, #070252);
-        color: #e0deff;
+        background: linear-gradient(45deg, #c9fcff,white);
+        color: #03214a;
     }
 
     .appointment-card {
-        background: linear-gradient(45deg, #80f28c, #054d0d);
-        color: #e6ffe8;
+        background: linear-gradient(45deg, #f4fff2, #ffffff );
+        color: #073000;
     }
 
     .department-card {
-        background: linear-gradient(45deg, #99080a, #faae32);
-        color: #ffe8ed;
+        background: linear-gradient(45deg, #ffeae8, #fffce8);
+        color: #331800;
     }
 
 
@@ -194,3 +242,14 @@
         }
 
 </style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.delete').on('click', function () {
+                var deleteUrl = $(this).data('delete-url');
+                $('#deleteUserForm').attr('action', deleteUrl);
+            });
+        });
+    </script>
+}

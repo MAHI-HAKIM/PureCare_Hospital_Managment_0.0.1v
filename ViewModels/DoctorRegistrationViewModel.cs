@@ -10,21 +10,21 @@ namespace PureCareHub_HospitalCare.ViewModels
 
         [Required(ErrorMessage = "Please enter the doctor's first name.")]
         [Display(Name = "First Name")]
-        public string FirstName { get; set; } = string.Empty;
+        public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Please enter the doctor's last name.")]
         [Display(Name = "Last Name")]
-        public string LastName { get; set; } = string.Empty;
+        public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please enter the phone number.")]
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Please enter the email.")]
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
-        public string Email { get; set; } = string.Empty;
+        public string ?Email { get; set; }
 
         [Required(ErrorMessage = "Please select working shift.")]
         [Display(Name = "Working Shift")]
@@ -36,6 +36,34 @@ namespace PureCareHub_HospitalCare.ViewModels
         public SelectList? DepartmentsList { get; set; }
         public Gender DoctorGender { get; set; }
         public IFormFile? Photo { get; set; }
-        public List<DoctorsSchedule> DoctorSchedules { get; set; } = new List<DoctorsSchedule>();
+
+        [Required(ErrorMessage = "Please select the working days.")]
+        [Display(Name = "Working Days")]
+        public ICollection<DayOfWeek> ?WorkingDays { get; set; }
+
+        [Required(ErrorMessage = "Please enter the start time.")]
+        [Display(Name = "Start Time")]
+        [DataType(DataType.Time)]
+        public DateTime StartTime { get; set; }
+
+        [Required(ErrorMessage = "Please enter the end time.")]
+        [Display(Name = "End Time")]
+        [DataType(DataType.Time)]
+        public DateTime EndTime { get; set; }
+
+        public List<SelectListItem> DayOfWeekSelectList
+        {
+            get
+            {
+                return Enum.GetValues(typeof(DayOfWeek))
+                           .Cast<DayOfWeek>()
+                           .Select(day => new SelectListItem
+                           {
+                               Value = day.ToString(),
+                               Text = Enum.GetName(typeof(DayOfWeek), day)
+                           })
+                           .ToList();
+            }
+        }
     }
 }

@@ -43,51 +43,35 @@
             <div class="navbar-collapse collapse ml-4" id="navbarsExample04" style="">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link  nested-bar" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Service" asp-action="Index">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-controller="Service" asp-action="List">Doctors</a>
-                    </li>
-                   
-                   
-                </ul>
-             
-
-                <ul class="navbar-nav mr-2">
                     @if (User.IsInRole("Admin"))
                     {
-                       @*  <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Manage
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Doctor" asp-action="Index">Manage Doctor</a>
-                                <a class="dropdown-item text-dark" href="#">Manage Patients</a>
-                                <a class="dropdown-item text-dark" href="#">Manage Staff</a>
-                            </div>
-                        </li> *@
-
                         <li class="nav-item">
-                            <a class="nav-link mr-3 text-dark" asp-area="" asp-controller="Doctor" asp-action="List">Manage</a>
-                        </li>
-                    }else if(User.IsInRole("Patient"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link mr-3 text-dark" asp-area="" asp-controller="MedicalHistory" asp-action="Index">Medical History</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mr-3 text-dark" asp-area="" asp-controller="Appointment" asp-action="Index">Appointment</a>
+                            <a class="nav-link mr-3 text-dark nested-bar" asp-area="" asp-controller="Admin" asp-action="DashBoard">Manage</a>
                         </li>
                     }
+                    else if (User.IsInRole("Patient"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark nested-bar" asp-area="" asp-controller="Service" asp-action="Index">Services</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Appoinment
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="nav-link text-dark nested-bar  nested-bar" asp-area="" asp-controller="Service" asp-action="Index">Appointment</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="nav-link mr-3 text-dark  nested-bar" asp-area="" asp-controller="MedicalHistory" asp-action="Index">Medical History</a>
+                            </div>
+                        </li>
+                    }
+
+                   
                 </ul>
-
-
                 <partial name ="_LoginPartial.cshtml" />
 
                 @* <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-success mr-3">Login</a> *@

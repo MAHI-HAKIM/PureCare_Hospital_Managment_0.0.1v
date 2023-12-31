@@ -14,6 +14,7 @@ public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
     public DbSet<Appointment>? appointments { get; set; }
     public DbSet<Department>? Departments { get; set; }
     public DbSet<DoctorsSchedule>? DoctorSchedules { get; set; }
+    public DbSet<WeekDays>? WeekDays { get; set; }
 
 
     public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
@@ -50,7 +51,7 @@ public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
             .IsRequired();
 
         builder.Entity<DoctorsSchedule>()
-            .HasOne(ds => ds.Doctor)
+            .HasOne(ds => ds.doctor)
             .WithMany(d => d.DoctorSchedules)
             .HasForeignKey(ds => ds.DoctorId);
 

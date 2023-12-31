@@ -43,5 +43,17 @@ namespace PureCareHub_HospitalCare.ViewModels
 
         // Additional string property for any extra information
         public string ?AdditionalInfo { get; set; } = string.Empty;
+        public ICollection<DayOfWeek> AvailableDays { get; set; } = new List<DayOfWeek>();
+        public List<string>? workingHours {  get; set; }
+        public ICollection<DoctorsSchedule>? schedules { get; set; }
+        public DoctorsSchedule? doctorsSchedule { get; set; }
+
+        [Required(ErrorMessage = "Please enter the appointment time.")]
+        [DataType(DataType.Time)]
+        [Display(Name = "Appointment Time")]
+        public TimeSpan AppointmentTime { get; set; }
+        public string? stratTime {  get; set; }
+        public string? endTime {  get; set; }
+
     }
 }
