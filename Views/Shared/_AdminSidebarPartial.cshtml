@@ -26,11 +26,15 @@
                     <i class="fa fa-tasks  text-white"></i> <span class="ms-1 d-none d-sm-inline  text-white">Appointment</span>
                 </a>
             </li>
-            <li class="nav-item nested-bar">
+         @*    <li class="nav-item nested-bar">
                 <a class="nav-link px-0" asp-area="" asp-controller="Department" asp-action="Index">
                     <i class="fa fa-hospital  text-white"></i> <span class="ms-1 d-none d-sm-inline  text-white">Department</span>
                 </a>
-                
+            </li> *@
+            <li class="nav-item nested-bar">
+                <a class="nav-link px-0" asp-area="" asp-controller="CallDepartmentApi" asp-action="List">
+                    <i class="fa fa-hospital  text-white"></i> <span class="ms-1 d-none d-sm-inline  text-white">Department</span>
+                </a>
             </li>
         </ul>
         <hr>

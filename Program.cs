@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using PureCareHub_HospitalCare.Data;
 using PureCareHub_HospitalCare.Areas.Identity.Data;
 using PureCareHub_HospitalCare.Models.Service;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +13,23 @@ var connectionString = builder.Configuration.GetConnectionString("DBContextConne
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(connectionString));
 
+//for  Multilingual Support and Localisation 
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddControllersWithViews()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();	
 builder.Services.AddScoped<IDocRepository, DocRepository>();
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
 	.AddEntityFrameworkStores<ApplicationDBContext>();
-
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+	var supportedCultures = new[] { "en", "tr" };
+	options.SetDefaultCulture(supportedCultures[0])
+		.AddSupportedCultures(supportedCultures)
+		.AddSupportedUICultures(supportedCultures);
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -36,6 +50,17 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+	ApplyCurrentCultureToResponseHeaders = true
+});
+app.UseRequestLocalization(options =>
+{
+	var questStringCultureProvider = options.RequestCultureProviders[0];
+	options.RequestCultureProviders.RemoveAt(0);
+	options.RequestCultureProviders.Insert(1, questStringCultureProvider);
+});
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -48,6 +73,14 @@ app.UseAuthorization();
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseEndpoints(endpoints =>
+	{
+		endpoints.MapControllerRoute(
+			name: "api",
+			pattern: "api/{controller=Service}/{action=Index}/{id?}");
+	});
+
 app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())

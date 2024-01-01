@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using PureCareHub_HospitalCare.Data;
 using PureCareHub_HospitalCare.Models;
 using PureCareHub_HospitalCare.ViewModels;
@@ -13,9 +14,12 @@ namespace PureCareHub_HospitalCare.Controllers
 		//private readonly IDocRepository _docRepository;
 		private readonly ApplicationDBContext _dbContext;
 		private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IStringLocalizer<ServiceController> _localizer;
+
         public ServiceController (ApplicationDBContext dbContext,
-                                    IWebHostEnvironment webHostEnvironment)
+                                    IWebHostEnvironment webHostEnvironment, IStringLocalizer<ServiceController> localizer)
         {
+            _localizer= localizer;
             _dbContext = dbContext;
             _webHostEnvironment = webHostEnvironment;
         }
@@ -25,7 +29,10 @@ namespace PureCareHub_HospitalCare.Controllers
         {
             var departments = _dbContext.Departments.ToList();
 
-			if (departments == null)
+            @ViewData["ourServices"] = _localizer["ourServices"];
+
+
+            if (departments == null)
 			{
 				Response.StatusCode = 404;
 				return View("404ID", 404);

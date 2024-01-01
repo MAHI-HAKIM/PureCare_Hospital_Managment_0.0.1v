@@ -6,20 +6,20 @@
     </div>
     <div class="container-fluid hero-container" style="margin-left:150px">
             <h1 style="color:#d9feff">
-            Welcome to <span style="font-weight:bold;color:deepskyblue;font-style:inherit">Pure</span><span style="font-weight:bolder; color:lawngreen;font-style:italic">Care</span>
+            @ViewData["Welcome"] <span style="font-weight:bold;color:deepskyblue;font-style:inherit">Pure</span><span style="font-weight:bolder; color:lawngreen;font-style:italic">Care</span>
         </h1>
             <h2>
-                <span style="font-weight:bold; color:#f5fff6"> Your Trusted Partner in Healthcare </span>
+                <span style="font-weight:bold; color:#f5fff6">  @ViewData["Heropage"] </span>
             </h2>
             @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
             {
                 <!-- User is logged in as a patient, show "Take an Appointment" -->
-                <a asp-area="" asp-controller="Service" asp-action="Index" class="btn-get-started " style="text-decoration: none;">Take an Appointment</a>
+                <a asp-area="" asp-controller="Service" asp-action="Index" class="btn-get-started " style="text-decoration: none;">@ViewData["takeAppointment"]</a>
             }
             else
             {
                 <!-- User is not logged in or not a patient, show "Get Started" -->
-                <a href="/Identity/Account/Register" class="btn-get-started " style="text-decoration: none;">Get Started</a>
+                @* <a href="/Identity/Account/Register" class="btn-get-started " style="text-decoration: none;">Get Started</a> *@
             }
         </div>
 </section>
@@ -33,15 +33,16 @@
             <div class="content">
                     <h1>Why Choose PureCare?</h1>
                     <p>
-                        At PureCare, we are dedicated to your well-being. Our commitment to excellence, personalized care,
-                        and cutting-edge technology sets us apart. Choose PureCare for a healthier tomorrow</p>
-                    <ul class="list-unstyled">
-                        <li><i class="bi bi-check"></i> Comprehensive and Compassionate Care</li>
-                        <li><i class="bi bi-check"></i> Cutting-Edge Medical Technology</li>
-                        <li><i class="bi bi-check"></i> Expert and Caring Healthcare Professionals</li>
-                        <li><i class="bi bi-check"></i> Patient-Centered Approach</li>
-                        <li><i class="bi bi-check"></i> Commitment to Excellence</li>
-                    </ul>
+                        @ViewData["WhyCooseUs"]
+                       </p>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check"></i> @ViewData["ComprehensiveCare"]</li>
+                            <li><i class="bi bi-check"></i> @ViewData["MedicalTechnology"]</li>
+                            <li><i class="bi bi-check"></i> @ViewData["HealthcareProfessionals"]</li>
+                            <li><i class="bi bi-check"></i> @ViewData["PatientCenteredApproach"]</li>
+                            <li><i class="bi bi-check"></i> @ViewData["CommitmentToExcellence"]</li>
+                        </ul>
+
               <div class="text-center">
                 <a href="#footer" style="text-decoration:none" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
               </div>
@@ -53,30 +54,22 @@
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-receipt"></i>
-                        <h4>Patient-Centric Care</h4>
-                        <p>Our focus is on compassionate and patient-centric care, 
-                            ensuring your well-being is our top priority. 
-                            We tailor our services to meet your unique needs.</p>
+                    <h4>@ViewData["PatientCentricCare_Title"]</h4>
+                    <p>@ViewData["PatientCentricCare_Description"]</p>
                    </div>
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-cube-alt"></i>
-                       <h4>Quality Assurance</h4>
-                        <p>
-                            We uphold the highest standards of quality in healthcare.
-                            Our commitment to excellence guarantees that you receive the best
-                            possible care and outcomes.
-                        </p>
+                                    <h4>@ViewData["QualityAssurance_Title"]</h4>
+                                    <p>@ViewData["QualityAssurance_Description"]</p>
                   </div>
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
                     <i class="bx bx-images"></i>
-                    <h4>Dedicated Support Team</h4>
-                    <p>Experience personalized support from our dedicated team.
-                       We are here to guide you through every step of your healthcare
-                       journey with empathy and care.</p>
+                                    <h4>@ViewData["DedicatedSupportTeam_Title"]</h4>
+                                    <p>@ViewData["DedicatedSupportTeam_Description"]</p>
                   </div>
                 </div>
               </div>
@@ -103,20 +96,20 @@
 
             <div class="icon-box">
               <div class="icon"><i class="bx bx-fingerprint"></i></div>
-                    <h4 class="title"><a>Personalized Care</a></h4>
-                 <p class="description">Experience healthcare tailored to your unique needs. Our personalized approach ensures you receive the attention and care you deserve.</p>
+                        <h4 class="title"><a>@ViewData["PatientCentricCare_Title"]</a></h4>
+                        <p class="description">@ViewData["PatientCentricCare_Description"].</p>
                 </div>
 
             <div class="icon-box">
               <div class="icon"><i class="bx bx-gift"></i></div>
-                    <h4 class="title"><a>Patient-Centered Focus</a></h4>
-                    <p class="description">We prioritize you. Our patient-centered approach puts your well-being at the forefront, creating a compassionate and supportive healthcare environment.</p>
+                        <h4 class="title"><a>@ViewData["QualityAssurance_Title"]</a></h4>
+                        <p class="description">@ViewData["QualityAssurance_Description"]</p>
                 </div>
 
             <div class="icon-box">
               <div class="icon"><i class="bx bx-atom"></i></div>
-                    <h4 class="title"><a>Cutting-Edge Technology</a></h4>
-                    <p class="description">Embrace innovation with our use of advanced technology. From diagnostics to treatment, we leverage cutting-edge tools to ensure the best outcomes for you.</p>
+                        <h4 class="title"><a>@ViewData["DedicatedSupportTeam_Title"]</a></h4>
+                        <p class="description">@ViewData["DedicatedSupportTeam_Description"]</p>
                 </div>
 
           </div>

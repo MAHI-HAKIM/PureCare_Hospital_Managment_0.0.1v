@@ -9,8 +9,8 @@ using PureCareHub_HospitalCare.ViewModels;
 
 namespace PureCareHub_HospitalCare.Controllers
 {
-    [Authorize]
-	public class AdminController : Controller
+    [Authorize(Roles = "Admin")]
+    public class AdminController : Controller
 	{
 		private readonly ApplicationDBContext dbContext;
 		private readonly UserManager<ApplicationUser> _userManager;
@@ -23,7 +23,6 @@ namespace PureCareHub_HospitalCare.Controllers
 		}
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DashBoard()
 		{
 			var patients = dbContext.patients.ToList(); // Make sure to use the correct property name
@@ -49,7 +48,6 @@ namespace PureCareHub_HospitalCare.Controllers
 		}
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteUser(string userId)
         {
             if (string.IsNullOrEmpty(userId))
@@ -64,6 +62,7 @@ namespace PureCareHub_HospitalCare.Controllers
             {
                 dbContext.patients.Remove(patient);
                 await dbContext.SaveChangesAsync();
+
             }
 
             // Find and delete the Identity user
@@ -73,8 +72,26 @@ namespace PureCareHub_HospitalCare.Controllers
                 var result = await _userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    TempData["Success"] = "You have successfully made an appointment";
-                    return View("DashBoard");
+                    TempData["Success"] = "You have successfully deleted an appointment";
+                    var patients = dbContext.patients.ToList(); // Make sure to use the correct property name
+
+                    // Check if the patient is found
+                    if (patients == null)
+                    {
+                        Response.StatusCode = 404;
+                        return View("404ID", 404);
+                    }
+                    var viewModel = new PatientsListViewModel
+                    {
+                        Patients = patients,
+                        Doctorscount = dbContext.doctors.Count(),
+                        DepartmentsCount = dbContext.Departments.Count(),
+                        FullAppointmentCount = dbContext.appointments.Count(),
+                        patientCount = dbContext.patients.Count()
+
+                    };
+                    await viewModel.PopulateEmailsAndCountsAsync(_userManager, dbContext);
+                    return RedirectToAction("DashBoard",viewModel);
                 }
                 else
                 {
