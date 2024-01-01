@@ -16,12 +16,10 @@ public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
     public DbSet<DoctorsSchedule>? DoctorSchedules { get; set; }
     public DbSet<WeekDays>? WeekDays { get; set; }
 
-
     public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
         : base(options)
     {
     }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

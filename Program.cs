@@ -16,13 +16,18 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 //for  Multilingual Support and Localisation 
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
 builder.Services.AddControllersWithViews()
     .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization();	
+
 builder.Services.AddScoped<IDocRepository, DocRepository>();
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
 	.AddEntityFrameworkStores<ApplicationDBContext>();
+
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
 	var supportedCultures = new[] { "en", "tr" };
@@ -102,7 +107,7 @@ using (var scope = app.Services.CreateScope())
 {
 	var userManager =
 		scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-	string email = "mahiabdul20@admin.com";
+	string email = "b201210605@sakarya.edu.tr";
 	string password = "Mahi.2003";
 
 	if (await userManager.FindByEmailAsync(email) == null)
@@ -114,7 +119,7 @@ using (var scope = app.Services.CreateScope())
 
 		await userManager.CreateAsync(user, password);
 
-		await userManager.AddToRoleAsync(user, "Admin");
+		//await userManager.AddToRoleAsync(user, "Admin");
 	}
 
 }
