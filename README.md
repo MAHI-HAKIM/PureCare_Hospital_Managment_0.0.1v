@@ -4,12 +4,21 @@
 ### Admin Dashboard
 <br>
  
-![App Demo Screenshot](./FoodCorner/screenshots/Screenshot%20(434).png)
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(264).png)
 
 ### Reviews
-![App Demo Screenshot](./FoodCorner/screenshots/Screenshot%20(441).png)
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(265).png)
 ### Orders
-![App Demo Screenshot](./FoodCorner/screenshots/Screenshot%20(450).png)
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(266).png)
+
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(267).png)
+
+### Reviews
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(268).png)  ![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(269).png)
+
+### Orders
+
+
 ## 📝 About
 - A fullstack website for a restaurant where you can order food online and get it delivered to your home.
   
