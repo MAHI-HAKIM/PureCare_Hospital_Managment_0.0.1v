@@ -79,7 +79,7 @@
                                             <td>@patient.LastName</td>
                                             <td>@((Model.PatientsEmails.TryGetValue(patient.UserId, out var email) && !string.IsNullOrEmpty(email)) ? email : "N/A")</td>
                                             <td>
-                                                <a href="" class="edit"><i class="fa fa-pencil" aria-hidden="true" style="font-size:20px;color:lightblue"></i> </a>
+                                                @* <a href="" class="edit"><i class="fa fa-pencil" aria-hidden="true" style="font-size:20px;color:lightblue"></i> </a> *@
                                                 <a href="#" class="delete" data-toggle="modal" data-target="#deleteEmployeeModal" data-delete-url="@Url.Action("DeleteUser", "Admin", new { userId = patient.UserId})">
                                                     <i class="fa fa-trash" aria-hidden="true" style="font-size:20px; color:red"></i>
                                                 </a>

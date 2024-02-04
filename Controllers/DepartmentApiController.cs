@@ -39,7 +39,6 @@ namespace PureCareHub_HospitalCare.Controllers
         }
 
 
-		// POST api/<YazarApiController>
 		[HttpPost]
 		public IActionResult Post([FromBody] Department dep)
 		{
@@ -67,6 +66,8 @@ namespace PureCareHub_HospitalCare.Controllers
 			// Update properties of the existing department
 			existingDepartment.DepartmentName = updatedDepartment.DepartmentName;
 			existingDepartment.DepartmentDescription = updatedDepartment.DepartmentDescription;
+			existingDepartment.PhotoPath = updatedDepartment.PhotoPath;
+
 			_dbContext.Update(existingDepartment);
 			_dbContext.SaveChanges();
 			_dbContext.SaveChanges();

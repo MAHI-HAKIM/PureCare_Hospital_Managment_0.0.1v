@@ -12,7 +12,7 @@ namespace PureCareHub_HospitalCare.Controllers
 		private readonly ILogger<HomeController> _logger;
         private readonly IStringLocalizer<HomeController> _localizer;
 
-            public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> localizer)
+        public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> localizer)
 		{
 			_logger = logger;
             _localizer = localizer;

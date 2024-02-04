@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WJfBU1p/W0GHo372Mw3/k4QZJAGhb77oJx536PMZC7Q=",
+  "Hash": "pN96c/vN9DNeVo39mDKaWq8tcpwxsI+RT43yoWxgx0Q=",
   "Source": "PureCareHub_HospitalCare",
   "BasePath": "_content/PureCareHub_HospitalCare",
   "Mode": "Default",
@@ -4163,6 +4163,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\e7490f2a-9d52-46e1-a4ed-6dc9a3830293_Cardiology.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\ea3e5d33-bf51-4e24-a5d6-edb9c79fa8e2_2f78280a-149d-4c19-9001-11b5a364fd15_testimonials-5.jpg",
+      "SourceId": "PureCareHub_HospitalCare",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\",
+      "BasePath": "_content/PureCareHub_HospitalCare",
+      "RelativePath": "Images/ea3e5d33-bf51-4e24-a5d6-edb9c79fa8e2_2f78280a-149d-4c19-9001-11b5a364fd15_testimonials-5.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\ea3e5d33-bf51-4e24-a5d6-edb9c79fa8e2_2f78280a-149d-4c19-9001-11b5a364fd15_testimonials-5.jpg"
     },
     {
       "Identity": "C:\\Users\\mahia\\Desktop\\PureCareHub_HospitalCare\\wwwroot\\Images\\ebb279f0-3019-4684-ba7f-fd74476dcc63_Pediatrics.jpg",

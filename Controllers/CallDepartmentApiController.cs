@@ -45,7 +45,7 @@ namespace PureCareHub_HospitalCare.Controllers
 
 			if (response.IsSuccessStatusCode)
 			{
-				TempData["SuccessDep"] = "Successfully Updated a department";
+				TempData["SuccessDep"] = "Successfully Added a department";
 				return RedirectToAction("List");
 			}
 			else

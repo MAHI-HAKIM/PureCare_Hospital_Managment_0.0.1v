@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace PureCareHub_HospitalCare.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DoctorController : Controller
     {
         //private readonly IDocRepository _docRepository;
@@ -32,7 +32,6 @@ namespace PureCareHub_HospitalCare.Controllers
             _docRepository = docRepository;
         }
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             var objDocotr = _dbContext.doctors.ToList();
@@ -73,7 +72,6 @@ namespace PureCareHub_HospitalCare.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public ViewResult Create()
         {
             var viewModel = new DoctorRegistrationViewModel {
@@ -89,7 +87,6 @@ namespace PureCareHub_HospitalCare.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IActionResult Create(DoctorRegistrationViewModel model)
         {
 
@@ -181,7 +178,6 @@ namespace PureCareHub_HospitalCare.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int? docid)
         {
             if (docid == null || docid == 0)
@@ -217,7 +213,6 @@ namespace PureCareHub_HospitalCare.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IActionResult Edit(DoctorEditViewModel model)
         {
 
@@ -322,7 +317,6 @@ namespace PureCareHub_HospitalCare.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int? docid)
         {
             if (docid == null || docid == 0)
