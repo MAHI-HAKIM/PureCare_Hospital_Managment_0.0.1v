@@ -4,7 +4,7 @@
 ### Admin Dashboard
 <br>
  
-![App Demo Screenshot](./FoodCorner/screenshots/Screenshot%20(434).png)
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(264).png)
 
 ### Reviews
 ![App Demo Screenshot](./FoodCorner/screenshots/Screenshot%20(441).png)
