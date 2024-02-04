@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+//Patient Appointment Migration
 namespace PureCareHub_HospitalCare.Migrations
 {
     public partial class PatientDoctorAppointment : Migration
