@@ -2,6 +2,7 @@
 using PureCareHub_HospitalCare.Models;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace PureCareHub_HospitalCare.ViewModels
 {
     public class AppointmentRegistationViewModel
