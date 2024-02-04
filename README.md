@@ -2,7 +2,6 @@
 
 ## 💻 Demo Views
 ### Landing Page
-<br>
 ![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(264).png)
 
 ###  Admin Dashboard
