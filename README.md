@@ -1,26 +1,27 @@
-# Food Corner
+# PureCare Medical center
 
-## 💻 Demo
-### Admin Dashboard
-<br>
- 
+## 💻 Demo Views
+
+### Landing Page
 ![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(264).png)
 
-### Reviews
+###  Admin Dashboard
 ![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(265).png)
-### Orders
+
+### Admin Dashboard (2)
 ![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(266).png)
 
-![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(267).png)
+### Services
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(268).png) 
 
-### Reviews
-![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(268).png)  ![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(269).png)
+### Appointment
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(269).png)
 
-### Orders
-
+### Medical History
+![App Demo Screenshot](https://github.com/MAHI-HAKIM/PureCare_Hospital_Managment_0.0.1v/blob/main/Screenshots/Screenshot%20(270).png)
 
 ## 📝 About
-- A fullstack website for a restaurant where you can order food online and get it delivered to your home.
+- A full-stack website for a hospital where you can make an appointment, receive medical reports from the doctor, and have access to all your medical history
   
 ## 🛠️ Technologies Used
 
@@ -40,11 +41,11 @@
 ## 🚀Features
 - User Authentication and Authorization.
 - Multi-language support.
-- User register and login.
+- User register and log in.
 - Admin can 
-  - add, edit and delete menus.
-  - add, edit and delete restaurants.
-- Customers can
-  - make orders.
-  - list their orders.
-  - view restaurant menus.
+  - add, edit, and delete Doctor.
+  - add, edit, and delete Departments.
+- Patients can
+  - Make an appointment.
+  - list their medical history.
+  - Comment on their appointed doctor.
